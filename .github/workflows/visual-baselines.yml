@@ -1,0 +1,39 @@
+name: Update visual baselines
+
+# Visual baselines are platform-pinned to Linux and only ever produced by this
+# workflow, so every comparison runs against pixels rendered in the same
+# environment. The result is a reviewable PR — baselines never change silently.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  update-baselines:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Regenerate baselines
+        run: npx playwright test --project=visual --update-snapshots
+        env:
+          TARGET: production
+      - name: Open PR with updated baselines
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: chore/update-visual-baselines
+          commit-message: 'chore: update visual baselines (Linux-rendered)'
+          title: 'chore: update visual baselines'
+          body: |
+            Regenerated Linux-rendered visual baselines via the *Update visual baselines* workflow.
+
+            Review the image diffs in the Files tab before merging — every pixel change
+            should be explainable by an intentional UI change.
+          add-paths: tests/__screenshots__/**

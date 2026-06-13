@@ -1,0 +1,81 @@
+name: AI auto-fix
+
+# Guard-railed self-healing: re-runs the suite, triages failures, and lets the
+# auto-fix agent propose a patch ONLY for failures that look like test bugs
+# (selector drift, wrong element type). The patch must survive
+# `git apply --check` + `tsc --noEmit`, may only touch tests/ and src/, and is
+# delivered as a PR for human review. Product bugs are never "fixed" away.
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: Environment to reproduce failures against
+        type: choice
+        options: [production, with-bugs]
+        default: production
+
+jobs:
+  autofix:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      models: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Reproduce failures
+        run: npx playwright test --project=api --project=e2e-chromium --project=a11y
+        env:
+          TARGET: ${{ inputs.target }}
+        continue-on-error: true
+      - name: Triage
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx tsx scripts/triage/triage-agent.ts
+      - name: Attempt guard-railed auto-fix
+        id: fix
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set +e
+          npx tsx scripts/triage/autofix-agent.ts
+          code=$?
+          set -e
+          if [ "$code" = "0" ]; then echo "patched=true" >> "$GITHUB_OUTPUT"; else echo "patched=false" >> "$GITHUB_OUTPUT"; fi
+      - name: Verify the patch actually fixes the failures
+        if: steps.fix.outputs.patched == 'true'
+        run: npx playwright test --project=e2e-chromium --project=a11y
+        env:
+          TARGET: ${{ inputs.target }}
+      - name: Open PR with the fix
+        if: steps.fix.outputs.patched == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: fix/ai-autofix
+          commit-message: 'fix(tests): AI-proposed repair for failing tests'
+          title: 'fix(tests): AI-proposed test repair'
+          body: |
+            Patch proposed by the auto-fix agent and verified in CI:
+
+            - `git apply --check` passed
+            - `tsc --noEmit` passed
+            - the previously failing lane re-ran green with the patch applied
+
+            Triage report for the original failures is attached to the workflow run.
+            Review like any other PR — the agent only ever edits `tests/` and `src/`.
+          add-paths: |
+            tests/**
+            src/**
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: autofix-triage
+          path: triage-output/
+          retention-days: 14

@@ -1,0 +1,73 @@
+name: Nightly bug hunt
+
+# Proves the suite is falsifiable: runs everything against the intentionally
+# broken "with-bugs" deployment of the same product. The suite MUST fail
+# loudly there; the AI triage agent then classifies every failure, and the
+# auto-fix agent proposes guard-railed patches for anything that is a test
+# bug rather than a product bug.
+
+on:
+  schedule:
+    - cron: '17 6 * * *'
+  workflow_dispatch:
+
+jobs:
+  bug-hunt:
+    name: Suite vs with-bugs build (must fail)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      models: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Run suite against the with-bugs deployment
+        run: npx playwright test --project=api --project=e2e-chromium --project=a11y
+        env:
+          TARGET: with-bugs
+        continue-on-error: true
+      - name: Falsifiability gate — the suite must have caught planted bugs
+        run: npx tsx scripts/assert-falsifiable.ts
+      - name: AI triage of caught bugs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx tsx scripts/triage/triage-agent.ts
+      - name: Publish triage to job summary
+        run: cat triage-output/triage-report.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bug-hunt-triage
+          path: triage-output/
+          retention-days: 30
+
+  nightly-production:
+    name: Full regression vs production
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      models: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Full run (all lanes, production)
+        run: npx playwright test --project=api --project=e2e-chromium --project=a11y
+        env:
+          TARGET: production
+      - name: Triage on failure
+        if: failure()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npx tsx scripts/triage/triage-agent.ts
+          cat triage-output/triage-report.md >> "$GITHUB_STEP_SUMMARY"

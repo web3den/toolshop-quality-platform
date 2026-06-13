@@ -1,0 +1,40 @@
+{
+  "name": "toolshop-quality-platform",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Senior-level test architecture reference: typed API client generated from OpenAPI, factories/builders, layered fixtures, tagged lanes, visual + a11y + contract testing, and AI-assisted failure triage in CI. System under test: Toolshop (practicesoftwaretesting.com).",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "generate:types": "tsx scripts/generate-types.ts",
+    "test": "playwright test",
+    "test:smoke": "playwright test --grep @smoke",
+    "test:api": "playwright test --project=api",
+    "test:contract": "playwright test --grep @contract",
+    "test:e2e": "playwright test --project=e2e-chromium",
+    "test:visual": "playwright test --project=visual",
+    "test:a11y": "playwright test --grep @a11y",
+    "test:bug-hunt": "cross-env TARGET=with-bugs playwright test --project=api --project=e2e-chromium --project=a11y",
+    "triage": "tsx scripts/triage/triage-agent.ts",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.2",
+    "@faker-js/faker": "^9.8.0",
+    "@playwright/test": "^1.53.0",
+    "@types/node": "^22.15.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^9.28.0",
+    "openapi-fetch": "^0.14.0",
+    "openapi-typescript": "^7.8.0",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.33.0",
+    "zod": "^3.25.0"
+  }
+}
