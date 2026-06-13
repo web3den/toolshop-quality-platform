@@ -64,6 +64,15 @@ export class CheckoutPage extends BasePage {
     await this.houseNumber.fill(address.house_number);
     // Auto-fill is complete once the lookup response populates the city.
     await expect(this.city).not.toHaveValue('', { timeout: 15_000 });
+    // The faker-backed lookup sometimes returns no street/state. The form
+    // requires them client-side, and the server only cross-validates fields
+    // its own lookup returned — so a fallback for blanks is contract-safe.
+    for (const field of [this.street, this.state]) {
+      if ((await field.inputValue()) === '') {
+        await field.fill('N/A');
+      }
+    }
+    await expect(this.proceedFromAddress).toBeEnabled();
     await this.proceedFromAddress.click();
   }
 
