@@ -1,0 +1,36 @@
+#1 POST https://api.practicesoftwaretesting.com/users/register
+→ {"accept":"application/json","content-type":"application/json"}
+{
+  "first_name": "Alan",
+  "last_name": "Haley",
+  "address": {
+    "street": "6211 Elinor Spring",
+    "house_number": "103",
+    "city": "Towson",
+    "state": "Maine",
+    "country": "US",
+    "postal_code": "84873"
+  },
+  "phone": "4703499145",
+  "dob": "1989-07-12",
+  "password": "Aa1…«redacted»…tT (len=16)",
+  "email": "tqp.mr84ah4d.3163.1.dgra1wx1@example.com"
+}
+← 201 (623ms) {"access-control-allow-origin":"*","access-control-expose-headers":"Content-Disposition","cache-control":"no-cache, private","connection":"Upgrade, close","content-type":"application/json","date":"Sun, 05 Jul 2026 18:21:10 GMT","server":"Apache/2.4.52 (Ubuntu)","transfer-encoding":"chunked","upgrade":"h2"}
+{
+  "first_name": "Alan",
+  "last_name": "Haley",
+  "phone": "4703499145",
+  "dob": "1989-07-12",
+  "email": "tqp.mr84ah4d.3163.1.dgra1wx1@example.com",
+  "id": "01kwsr6jv9j78457w8armxywkv",
+  "created_at": "2026-07-05 18:21:10",
+  "address": {
+    "street": "6211 Elinor Spring",
+    "house_number": "103",
+    "city": "Towson",
+    "state": "Maine",
+    "country": "US",
+    "postal_code": "84873"
+  }
+}

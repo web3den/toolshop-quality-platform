@@ -1,0 +1,10 @@
+#1 POST https://api.practicesoftwaretesting.com/users/login
+→ {"accept":"application/json","content-type":"application/json"}
+{
+  "email": "tqp.mr84a0w6.2185.1.0ui7cadv@example.com",
+  "password": "def…«redacted»…ng (len=16)"
+}
+← 401 (528ms) {"access-control-allow-origin":"*","access-control-expose-headers":"Content-Disposition","cache-control":"no-cache, private","connection":"Upgrade, close","content-type":"application/json","date":"Sun, 05 Jul 2026 18:20:49 GMT","server":"Apache/2.4.52 (Ubuntu)","transfer-encoding":"chunked","upgrade":"h2"}
+{
+  "error": "Unauthorized"
+}

@@ -1,0 +1,45 @@
+[
+  {
+    "seq": 1,
+    "method": "POST",
+    "url": "https://api.practicesoftwaretesting.com/users/register",
+    "status": 409,
+    "durationMs": 593,
+    "requestHeaders": {
+      "accept": "application/json",
+      "content-type": "application/json"
+    },
+    "requestBody": {
+      "first_name": "Misael",
+      "last_name": "Kessler",
+      "address": {
+        "street": "31000 Johnston Shore",
+        "house_number": "985",
+        "city": "Norwoodhaven",
+        "state": "New Mexico",
+        "country": "US",
+        "postal_code": "18724"
+      },
+      "phone": "4610654381",
+      "dob": "1961-05-31",
+      "password": "Aa1…«redacted»…A6 (len=16)",
+      "email": "customer@practicesoftwaretesting.com"
+    },
+    "responseHeaders": {
+      "access-control-allow-origin": "*",
+      "access-control-expose-headers": "Content-Disposition",
+      "cache-control": "no-cache, private",
+      "connection": "Upgrade, close",
+      "content-type": "application/json",
+      "date": "Sun, 05 Jul 2026 18:20:49 GMT",
+      "server": "Apache/2.4.52 (Ubuntu)",
+      "transfer-encoding": "chunked",
+      "upgrade": "h2"
+    },
+    "responseBody": {
+      "email": [
+        "A customer with this email address already exists."
+      ]
+    }
+  }
+]
