@@ -40,7 +40,9 @@ test.describe('Cart & Checkout API', () => {
       total?: number;
     };
     expect(created.id).toBeTruthy();
-    expect(created.invoice_number).toBeTruthy();
+    expect(created.invoice_number, 'invoice number must follow the INV-<digits> scheme').toMatch(
+      /^INV-\d+$/,
+    );
 
     const expectedTotal = cart.items.reduce((sum, i) => sum + i.product.price * i.quantity, 0);
     expect(created.total).toBeCloseTo(expectedTotal, 1);
@@ -65,8 +67,26 @@ test.describe('Cart & Checkout API', () => {
       .withBillingAddress(await resolveBillingAddress())
       .payByCreditCard()
       .build();
-    const created = unwrap(await apiAsCustomer.POST('/invoices', { body: invoice })) as { id?: string };
+    const created = unwrap(await apiAsCustomer.POST('/invoices', { body: invoice })) as {
+      id?: string;
+      total?: number;
+    };
     expect(created.id).toBeTruthy();
+    // Oracle: the cart we seeded, not the response itself — a checkout that
+    // charges the wrong amount must fail here. (The invoice endpoints do not
+    // expose payment_method, so the method itself has no readable oracle.)
+    const expectedTotal = cart.items.reduce((sum, i) => sum + i.product.price * i.quantity, 0);
+    expect(created.total, 'invoice total must equal seeded cart total').toBeCloseTo(expectedTotal, 1);
+
+    const persisted = unwrap(
+      await apiAsCustomer.GET('/invoices/{invoiceId}', {
+        params: { path: { invoiceId: created.id! } },
+      }),
+    ) as { status?: string; total?: number };
+    expect(persisted.status, 'fresh card-paid invoice must await fulfillment').toBe(
+      'AWAITING_FULFILLMENT',
+    );
+    expect(persisted.total).toBeCloseTo(expectedTotal, 1);
   });
 
   test('rejects checkout for an anonymous caller @regression', async ({ data, api }) => {

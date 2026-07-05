@@ -10,7 +10,9 @@ import fs from 'node:fs';
 import { execSync } from 'node:child_process';
 
 const MODEL = process.env.TRIAGE_MODEL ?? 'openai/gpt-4o-mini';
-const SKILL_PATH = 'docs/skills/test-quality-review.md';
+// Both skills together are the review contract: the checklist AND the
+// operational falsifiability procedure the checklist defers to.
+const SKILL_PATHS = ['docs/skills/test-quality-review.md', 'docs/skills/falsifiability-audit.md'];
 const OUT_PATH = 'triage-output/test-review.md';
 const MAX_FILES = 6;
 const MAX_FILE_CHARS = 9_000;
@@ -42,7 +44,7 @@ async function main(): Promise<void> {
     return;
   }
 
-  const skill = fs.readFileSync(SKILL_PATH, 'utf8');
+  const skill = SKILL_PATHS.map((p) => fs.readFileSync(p, 'utf8')).join('\n\n---\n\n');
   const sources = files
     .map((f) => `### ${f}\n\`\`\`ts\n${fs.readFileSync(f, 'utf8').slice(0, MAX_FILE_CHARS)}\n\`\`\``)
     .join('\n\n');
@@ -58,9 +60,13 @@ async function main(): Promise<void> {
         {
           role: 'system',
           content:
-            'You are a QA lead reviewing Playwright tests. Apply the following skill checklist ' +
-            'EXACTLY, including its review output format. Review each changed file. Be specific ' +
-            '(file + test title), be brief, and only flag real issues — do not invent problems.\n\n' +
+            'You are a QA lead reviewing Playwright tests. Apply the following skills EXACTLY, ' +
+            'including the review output format. For every test, name each assertion\u2019s oracle ' +
+            'and the concrete product bug that would flip it red; flag any assertion where you ' +
+            'cannot, and recommend the layer-appropriate falsifiability technique the author must ' +
+            'run (with-bugs target / oracle mutation / page.route corruption / injected break). ' +
+            'Review each changed file. Be specific (file + test title), be brief, and only flag ' +
+            'real issues — do not invent problems.\n\n' +
             skill,
         },
         { role: 'user', content: `Changed spec files:\n\n${sources}` },

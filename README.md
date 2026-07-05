@@ -96,9 +96,14 @@ reporting + redaction.
 Agents follow a written contract — [AGENTS.md](AGENTS.md) — and task
 playbooks in [docs/skills/](docs/skills/):
 
-- [test-quality-review](docs/skills/test-quality-review.md) — falsifiability
-  audit, definite DOs/DON'Ts, tagging rules (this is the system prompt of the
-  CI review agent, so humans and agents enforce the same bar)
+- [test-quality-review](docs/skills/test-quality-review.md) — review
+  checklist: definite DOs/DON'Ts, tagging rules (part of the CI review
+  agent's system prompt, so humans and agents enforce the same bar)
+- [falsifiability-audit](docs/skills/falsifiability-audit.md) — prove every
+  test can fail: oracle identification, per-layer break-it techniques
+  (with-bugs target, oracle mutation, `page.route` wire corruption, injected
+  layout/a11y breaks), audit mode for the existing suite, and the hard rule
+  that a generated test never seen red does not get committed
 - [test-from-acceptance-criteria](docs/skills/test-from-acceptance-criteria.md) —
   AC → falsifiable claims → cheapest layer → framework primitives → prove it fails
 - [exploratory-testing](docs/skills/exploratory-testing.md) — charter-driven

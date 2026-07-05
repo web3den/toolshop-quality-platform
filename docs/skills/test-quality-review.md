@@ -9,10 +9,17 @@ per test: **approve**, **needs-work** (with concrete items), or **reject**.
 For every assertion ask: *what product bug makes this go red?* If you cannot
 name one, the assertion is decoration, not a test.
 
-Run the mental mutation test:
+Screening questions (fast, for review):
 - If the API returned an empty list, wrong status, or unsorted data — fails?
 - If the button stopped working or the page rendered blank — fails?
 - If the copy/schema/redirect silently changed — fails?
+
+Screening is not proof. For new tests, and whenever an audit flags a suspect,
+run the operational procedure in
+[falsifiability-audit.md](falsifiability-audit.md): identify each assertion's
+oracle, then **witness the test red** using the cheapest technique for its
+layer (with-bugs target, oracle mutation, `page.route` wire corruption,
+injected layout/a11y breaks). A test nobody has seen fail is unverified.
 
 Red flags that make a test vacuous:
 - `expect(x).toBeDefined()` on something that is always defined
@@ -25,6 +32,9 @@ Red flags that make a test vacuous:
 For Toolshop tests: `@bug-sensitive` is **earned** — run the test against
 `TARGET=with-bugs` and watch it fail before adding the tag. The nightly
 falsifiability gate depends on that tag being honest.
+
+Hard rule for test-generating agents: a generated test that has never been
+witnessed red does not get committed (see falsifiability-audit.md).
 
 ## 2. Definite DOs
 

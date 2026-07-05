@@ -75,8 +75,10 @@ npm run triage              # AI triage of test-results/results.json
 
 Task-specific playbooks live in `docs/skills/`:
 
-- `docs/skills/test-quality-review.md` — falsifiability audit, definite
-  DOs/DON'Ts, tagging rules (also the CI review agent's system prompt)
+- `docs/skills/test-quality-review.md` — review checklist: DOs/DON'Ts,
+  tagging rules (part of the CI review agent's system prompt)
+- `docs/skills/falsifiability-audit.md` — prove any test can fail: per-layer
+  break-it techniques, audit sweep, hard rule for test-generating agents
 - `docs/skills/test-from-acceptance-criteria.md` — turn ACs/docs into tests
 - `docs/skills/exploratory-testing.md` — charter-driven exploration via the
   Chrome DevTools MCP (console/network/perf below the UI surface)

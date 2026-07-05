@@ -37,10 +37,12 @@ in both.
   path → `@smoke`; everything else starts as `@regression`.
 
 ### 5. Prove it can fail
-Before pushing, break the claim once: point at the with-bugs build (Toolshop),
-temporarily invert the oracle, or mutate the input. Watch it fail with a
-readable message, then restore. A test born green and never seen red is
-unverified.
+Before pushing, break the claim once using the layer-appropriate technique
+from [falsifiability-audit.md](falsifiability-audit.md) — with-bugs target,
+oracle mutation, `page.route` wire corruption, injected layout/a11y break.
+Watch it fail with a readable message, then restore. State which technique
+you used when presenting the test. A test born green and never seen red is
+unverified and does not get committed.
 
 ## Worked example
 
