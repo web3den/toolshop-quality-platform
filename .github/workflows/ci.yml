@@ -32,8 +32,8 @@ jobs:
           git diff --exit-code src/api/generated \
             || (echo '::error::OpenAPI spec drifted from committed types. Run `npm run generate:types` and review the contract change.' && exit 1)
 
-  api-tests:
-    name: API & contract tests
+  toolshop-api:
+    name: Toolshop — API & contract
     runs-on: ubuntu-latest
     needs: quality
     steps:
@@ -43,16 +43,22 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npx playwright test --project=api
+      - run: npx playwright test --project=toolshop-api
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: results-api
+          name: results-toolshop-api
           path: test-results/results.json
           retention-days: 7
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: allure-toolshop-api
+          path: allure-results/
+          retention-days: 7
 
-  e2e:
-    name: E2E & a11y (shard ${{ matrix.shard }})
+  toolshop-e2e:
+    name: Toolshop — E2E & a11y (shard ${{ matrix.shard }})
     runs-on: ubuntu-latest
     needs: quality
     strategy:
@@ -67,22 +73,28 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps chromium
-      - run: npx playwright test --project=e2e-chromium --project=a11y --shard=${{ matrix.shard }}
+      - run: npx playwright test --project=toolshop-e2e --project=toolshop-a11y --shard=${{ matrix.shard }}
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: results-e2e-${{ strategy.job-index }}
+          name: results-toolshop-e2e-${{ strategy.job-index }}
           path: test-results/results.json
           retention-days: 7
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: blob-e2e-${{ strategy.job-index }}
+          name: allure-toolshop-e2e-${{ strategy.job-index }}
+          path: allure-results/
+          retention-days: 7
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: blob-toolshop-e2e-${{ strategy.job-index }}
           path: blob-report/
           retention-days: 7
 
-  visual:
-    name: Visual regression
+  forgebeyond:
+    name: ForgeBeyond — web, SEO & a11y
     runs-on: ubuntu-latest
     needs: quality
     steps:
@@ -93,13 +105,41 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps chromium
-      - name: Run visual tests (skips cleanly if baselines not yet committed)
+      - run: npx playwright test --project=forgebeyond-web --project=forgebeyond-a11y
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: results-forgebeyond
+          path: test-results/results.json
+          retention-days: 7
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: allure-forgebeyond
+          path: allure-results/
+          retention-days: 7
+
+  visual:
+    name: Visual regression (both products)
+    runs-on: ubuntu-latest
+    needs: quality
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Run visual lanes (skips a product cleanly until baselines are committed)
         run: |
-          if [ -d tests/__screenshots__ ]; then
-            npx playwright test --project=visual
-          else
-            echo '::notice::No committed baselines yet — run the "Update visual baselines" workflow to create them.'
-          fi
+          for project in toolshop-visual forgebeyond-visual; do
+            if [ -d "tests/__screenshots__/$project" ]; then
+              npx playwright test --project="$project"
+            else
+              echo "::notice::No committed baselines for $project yet — run the 'Update visual baselines' workflow."
+            fi
+          done
       - uses: actions/upload-artifact@v4
         if: failure()
         with:
@@ -110,8 +150,8 @@ jobs:
   merge-report:
     name: Merge HTML report
     runs-on: ubuntu-latest
-    needs: e2e
-    if: always() && needs.e2e.result != 'skipped'
+    needs: toolshop-e2e
+    if: always() && needs.toolshop-e2e.result != 'skipped'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -121,7 +161,7 @@ jobs:
       - run: npm ci
       - uses: actions/download-artifact@v4
         with:
-          pattern: blob-e2e-*
+          pattern: blob-toolshop-e2e-*
           path: all-blobs
           merge-multiple: true
       - run: npx playwright merge-reports --reporter html ./all-blobs
@@ -131,10 +171,88 @@ jobs:
           path: playwright-report/
           retention-days: 14
 
+  allure:
+    name: Publish Allure report
+    runs-on: ubuntu-latest
+    needs: [toolshop-api, toolshop-e2e, forgebeyond]
+    if: always() && github.event_name != 'pull_request'
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: allure-*
+          path: allure-results
+          merge-multiple: true
+      - name: Restore Allure history from gh-pages (trend charts across runs)
+        run: |
+          if git fetch origin gh-pages --depth=1 2>/dev/null; then
+            git worktree add /tmp/gh-pages gh-pages || true
+            if [ -d /tmp/gh-pages/history ]; then
+              mkdir -p allure-results/history
+              cp -r /tmp/gh-pages/history/* allure-results/history/ || true
+            fi
+          fi
+      - name: Generate report (history/ inside carries trends to the next run)
+        run: npx allure generate allure-results --clean -o allure-report
+      - name: Publish to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./allure-report
+          publish_branch: gh-pages
+
+  test-review:
+    name: AI test-quality review (advisory)
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    permissions:
+      contents: read
+      models: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Review changed spec files against the quality skill
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BASE_REF: origin/${{ github.base_ref }}
+        run: npx tsx scripts/triage/test-review-agent.ts
+      - name: Comment review on PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            if (!fs.existsSync('triage-output/test-review.md')) return;
+            const body = fs.readFileSync('triage-output/test-review.md', 'utf8').slice(0, 65000);
+            const marker = '<!-- ai-test-review -->';
+            const { data: comments } = await github.rest.issues.listComments({
+              ...context.repo, issue_number: context.issue.number,
+            });
+            const existing = comments.find(c => c.body.includes(marker));
+            const payload = `${marker}\n${body}`;
+            if (existing) {
+              await github.rest.issues.updateComment({ ...context.repo, comment_id: existing.id, body: payload });
+            } else {
+              await github.rest.issues.createComment({ ...context.repo, issue_number: context.issue.number, body: payload });
+            }
+
   triage:
     name: AI failure triage
     runs-on: ubuntu-latest
-    needs: [api-tests, e2e, visual]
+    needs: [toolshop-api, toolshop-e2e, forgebeyond, visual]
     if: always() && contains(needs.*.result, 'failure')
     permissions:
       contents: read
@@ -156,13 +274,13 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           mkdir -p triage-output
-          : > triage-output/triage-report.md
+          : > triage-output/combined.md
           for f in all-results/*/results.json; do
             echo "Triaging $f"
             PW_JSON="$f" npx tsx scripts/triage/triage-agent.ts || true
             cat triage-output/triage-report.md >> triage-output/combined.md || true
           done
-          mv triage-output/combined.md triage-output/triage-report.md 2>/dev/null || true
+          mv triage-output/combined.md triage-output/triage-report.md
       - name: Publish triage to job summary
         run: cat triage-output/triage-report.md >> "$GITHUB_STEP_SUMMARY"
       - name: Comment triage on PR

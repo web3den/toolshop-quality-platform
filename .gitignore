@@ -8,3 +8,5 @@ blob-report/
 .env
 .DS_Store
 triage-output/
+allure-results/
+allure-report/

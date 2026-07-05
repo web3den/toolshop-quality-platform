@@ -1,19 +1,21 @@
-import { test, expect } from '../../src/fixtures/test.fixtures';
-import { buildUser } from '../../src/data/factories/user.factory';
-import { unwrap } from '../../src/api/client';
-import { target } from '../../src/config/env';
-import { adminStatePath } from '../../src/fixtures/auth.paths';
+import { test, expect } from '../../../src/fixtures/test.fixtures';
+import { buildUser } from '../../../src/data/factories/user.factory';
+import { unwrap } from '../../../src/api/client';
+import { registerFreshUser } from '../../../src/api/auth';
+import { adminStatePath } from '../../../src/fixtures/auth.paths';
 
 test.describe('Authentication UI', () => {
-  test('valid login redirects to account @smoke', async ({ loginPage, page }) => {
+  test('valid login redirects to account @smoke', async ({ loginPage, page, customerCreds }) => {
     await loginPage.open();
-    await loginPage.loginAs(target.users.customer.email, target.users.customer.password);
+    await loginPage.loginAs(customerCreds.email, customerCreds.password);
     await expect(page).toHaveURL(/\/account/);
   });
 
   test('invalid credentials show an error, not a redirect @smoke', async ({ loginPage, page }) => {
+    // Disposable account: failed logins lock shared accounts on this SUT.
+    const disposable = await registerFreshUser();
     await loginPage.open();
-    await loginPage.loginAs(target.users.customer.email, 'wrong-password-123');
+    await loginPage.loginAs(disposable.email, 'wrong-password-123');
     await expect(loginPage.error).toBeVisible();
     await expect(page).toHaveURL(/auth\/login/);
   });

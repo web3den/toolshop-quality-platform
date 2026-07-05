@@ -1,10 +1,10 @@
-import { test, expect } from '../../src/fixtures/test.fixtures';
-import { unwrap } from '../../src/api/client';
-import { InvoiceBuilder } from '../../src/data/builders/invoice.builder';
-import { resolveBillingAddress } from '../../src/data/factories/address.factory';
-import { pollUntil } from '../../src/utils/poller';
-import { loginToken } from '../../src/api/auth';
-import { createToolshopClient } from '../../src/api/client';
+import { test, expect } from '../../../src/fixtures/test.fixtures';
+import { unwrap } from '../../../src/api/client';
+import { InvoiceBuilder } from '../../../src/data/builders/invoice.builder';
+import { resolveBillingAddress } from '../../../src/data/factories/address.factory';
+import { pollUntil } from '../../../src/utils/poller';
+import { loginToken, registerFreshUser } from '../../../src/api/auth';
+import { createToolshopClient } from '../../../src/api/client';
 
 interface CartView {
   cart_items?: Array<{ quantity: number; product?: { id: string; price: number } }>;
@@ -79,8 +79,10 @@ test.describe('Cart & Checkout API', () => {
   test('a customer cannot read another user\'s invoices (tenant isolation) @regression', async ({
     apiAsCustomer,
   }) => {
-    // customer2 is also seeded by the product's database seeder.
-    const otherToken = await loginToken('customer2@practicesoftwaretesting.com', 'welcome01');
+    // Freshly registered "other" user: guaranteed distinct from whichever
+    // customer identity the lockout-aware resolver picked for this run.
+    const otherCreds = await registerFreshUser();
+    const otherToken = await loginToken(otherCreds.email, otherCreds.password);
     const other = createToolshopClient({ token: otherToken });
 
     const mine = unwrap(

@@ -5,15 +5,24 @@ Workspace, the CI triage/auto-fix agents) operating on this repo.
 
 ## What this repo is
 
-A Playwright + TypeScript test platform for the public **Toolshop** demo
-e-commerce product (`practicesoftwaretesting.com`). We do not own the SUT.
-Three deployments matter:
+A Playwright + TypeScript **multi-product** test platform:
 
-| Target | Purpose | How to select |
-| --- | --- | --- |
-| `production` | stable build — suite must be green | `TARGET=production` (default) |
-| `with-bugs` | intentionally broken build — suite must fail | `TARGET=with-bugs` |
-| `local` | docker-compose build for hermetic runs | `TARGET=local` |
+1. **Toolshop** (`tests/toolshop/`) — public demo e-commerce app
+   (`practicesoftwaretesting.com`). We do not own this SUT. Three deployments:
+
+   | Target | Purpose | How to select |
+   | --- | --- | --- |
+   | `production` | stable build — suite must be green | `TARGET=production` (default) |
+   | `with-bugs` | intentionally broken build — suite must fail | `TARGET=with-bugs` |
+   | `local` | docker-compose build for hermetic runs | `TARGET=local` |
+
+2. **ForgeBeyond** (`tests/forgebeyond/`) — the owner's production marketing
+   site (`forgebeyond.ai`). Self-owned: findings here are real product bugs to
+   report, and the a11y bar is stricter (critical + serious gate with a
+   known-issues register in `tests/forgebeyond/a11y/known-issues.ts`).
+
+Playwright projects are product-prefixed (`toolshop-api`, `forgebeyond-web`,
+...). Never mix products in one spec, fixture file, or page object.
 
 ## Commands you may rely on
 
@@ -22,10 +31,11 @@ npm ci                      # install
 npm run typecheck           # tsc --noEmit
 npm run lint                # eslint (enforces architecture rules)
 npm run generate:types      # regenerate typed API surface from live OpenAPI
-npm run test:api            # API + contract lane (no browser, fastest signal)
-npm run test:e2e            # browser journeys (needs `npx playwright install chromium`)
-npm run test:smoke          # @smoke across lanes
-npm run test:bug-hunt       # full suite vs with-bugs build (expected to fail)
+npm run test:toolshop       # all Toolshop lanes (API + e2e + a11y)
+npm run test:forgebeyond    # all ForgeBeyond lanes (web + a11y)
+npm run test:api            # Toolshop API + contract lane (fastest signal)
+npm run test:smoke          # @smoke across both products
+npm run test:bug-hunt       # Toolshop suite vs with-bugs build (expected to fail)
 npm run triage              # AI triage of test-results/results.json
 ```
 
@@ -51,11 +61,23 @@ npm run triage              # AI triage of test-results/results.json
    macOS/Windows. Use the *Update visual baselines* workflow.
 7. **Auto-fix scope.** CI agents may only modify `tests/` and `src/`, must keep
    `tsc --noEmit` green, and deliver changes as a PR — never push to `main`.
+8. **Redaction is mandatory.** Anything that leaves the process (attachments,
+   assertion messages, LLM payloads, console output) goes through
+   `src/utils/redact.ts`. Never log a raw password, token, JWT, or cookie —
+   there is no acceptable exception.
+9. **Shared accounts are fragile.** Toolshop locks accounts after failed
+   logins (423). Negative-credential tests use `registerFreshUser()`
+   disposable accounts only; customer identity comes from
+   `resolveCustomerCredentials()` / the `customerCreds` fixture, never a
+   hardcoded seeded email.
 
 ## Skills
 
 Task-specific playbooks live in `docs/skills/`:
 
+- `docs/skills/test-quality-review.md` — falsifiability audit, definite
+  DOs/DON'Ts, tagging rules (also the CI review agent's system prompt)
+- `docs/skills/test-from-acceptance-criteria.md` — turn ACs/docs into tests
 - `docs/skills/failure-triage.md` — classify failures (product-bug / test-bug / flake / environment)
 - `docs/skills/locator-repair.md` — repair selector drift correctly
 - `docs/skills/visual-baseline-review.md` — review screenshot diffs

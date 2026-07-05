@@ -3,8 +3,8 @@
  * expectations. Type generation catches drift at compile time; these catch
  * drift at runtime (fields silently missing/renamed/retyped in live envs).
  */
-import { test, expect } from '../../src/fixtures/test.fixtures';
-import { unwrap } from '../../src/api/client';
+import { test, expect } from '../../../src/fixtures/test.fixtures';
+import { unwrap } from '../../../src/api/client';
 import { z } from 'zod';
 
 const ProductSchema = z.object({

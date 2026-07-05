@@ -28,7 +28,7 @@ jobs:
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - name: Run suite against the with-bugs deployment
-        run: npx playwright test --project=api --project=e2e-chromium --project=a11y
+        run: npx playwright test --project=toolshop-api --project=toolshop-e2e --project=toolshop-a11y
         env:
           TARGET: with-bugs
         continue-on-error: true
@@ -47,7 +47,7 @@ jobs:
           retention-days: 30
 
   nightly-production:
-    name: Full regression vs production
+    name: Full regression vs production (both products)
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -61,7 +61,7 @@ jobs:
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - name: Full run (all lanes, production)
-        run: npx playwright test --project=api --project=e2e-chromium --project=a11y
+        run: npx playwright test --project=toolshop-api --project=toolshop-e2e --project=toolshop-a11y --project=forgebeyond-web --project=forgebeyond-a11y
         env:
           TARGET: production
       - name: Triage on failure

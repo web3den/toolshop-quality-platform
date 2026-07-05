@@ -31,7 +31,7 @@ jobs:
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - name: Reproduce failures
-        run: npx playwright test --project=api --project=e2e-chromium --project=a11y
+        run: npx playwright test --project=toolshop-api --project=toolshop-e2e --project=toolshop-a11y
         env:
           TARGET: ${{ inputs.target }}
         continue-on-error: true
@@ -51,7 +51,7 @@ jobs:
           if [ "$code" = "0" ]; then echo "patched=true" >> "$GITHUB_OUTPUT"; else echo "patched=false" >> "$GITHUB_OUTPUT"; fi
       - name: Verify the patch actually fixes the failures
         if: steps.fix.outputs.patched == 'true'
-        run: npx playwright test --project=e2e-chromium --project=a11y
+        run: npx playwright test --project=toolshop-e2e --project=toolshop-a11y
         env:
           TARGET: ${{ inputs.target }}
       - name: Open PR with the fix

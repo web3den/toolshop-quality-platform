@@ -21,8 +21,8 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps chromium
-      - name: Regenerate baselines
-        run: npx playwright test --project=visual --update-snapshots
+      - name: Regenerate baselines (both products)
+        run: npx playwright test --project=toolshop-visual --project=forgebeyond-visual --update-snapshots
         env:
           TARGET: production
       - name: Open PR with updated baselines

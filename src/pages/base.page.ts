@@ -16,6 +16,9 @@ export abstract class BasePage {
   }
 
   async goto(path: string): Promise<void> {
-    await this.page.goto(path);
+    // 'domcontentloaded', not 'load': the SPA boots off the DOM, while the
+    // window load event can hang on slow ad/CDN assets and time tests out.
+    // Real readiness is established by web-first assertions on visible state.
+    await this.page.goto(path, { waitUntil: 'domcontentloaded' });
   }
 }

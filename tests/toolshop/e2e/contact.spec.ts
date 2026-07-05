@@ -1,5 +1,5 @@
-import { test, expect } from '../../src/fixtures/test.fixtures';
-import { buildContactMessage } from '../../src/data/factories/message.factory';
+import { test, expect } from '../../../src/fixtures/test.fixtures';
+import { buildContactMessage } from '../../../src/data/factories/message.factory';
 
 test.describe('Contact form', () => {
   test('submits a valid message @regression', async ({ contact }) => {

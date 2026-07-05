@@ -15,7 +15,9 @@ import { CheckoutPage } from '../pages/checkout.page';
 import { ContactPage } from '../pages/contact.page';
 import { HeaderComponent } from '../pages/header.component';
 import { createToolshopClient, type ToolshopClient } from '../api/client';
-import { customerClient, adminClient } from '../api/auth';
+import { loginToken, resolveCustomerCredentials, type Credentials } from '../api/auth';
+import { ApiLog } from '../api/logging';
+import { target } from '../config/env';
 import { seedCart, type SeededCart } from '../data/seeding/cart.seeder';
 
 type Cleanup = () => Promise<void>;
@@ -34,9 +36,13 @@ interface Fixtures {
   checkout: CheckoutPage;
   contact: ContactPage;
   header: HeaderComponent;
+  /** Per-test HTTP log; redacted transcript auto-attaches to the report. */
+  apiLog: ApiLog;
   api: ToolshopClient;
   apiAsCustomer: ToolshopClient;
   apiAsAdmin: ToolshopClient;
+  /** The customer identity actually in use (lockout-aware resolution). */
+  customerCreds: Credentials;
   data: DataLifecycle;
 }
 
@@ -48,9 +54,22 @@ export const test = base.extend<Fixtures>({
   contact: async ({ page }, use) => use(new ContactPage(page)),
   header: async ({ page }, use) => use(new HeaderComponent(page)),
 
-  api: async ({}, use) => use(createToolshopClient()),
-  apiAsCustomer: async ({}, use) => use(await customerClient()),
-  apiAsAdmin: async ({}, use) => use(await adminClient()),
+  apiLog: async ({}, use, testInfo) => {
+    const log = new ApiLog();
+    await use(log);
+    // Attach after the test body so failures still get their transcript.
+    await log.attachTo(testInfo);
+  },
+  api: async ({ apiLog }, use) => use(createToolshopClient({ log: apiLog })),
+  customerCreds: async ({}, use) => use(await resolveCustomerCredentials()),
+  apiAsCustomer: async ({ apiLog, customerCreds }, use) => {
+    const { email, password } = customerCreds;
+    await use(createToolshopClient({ token: await loginToken(email, password), log: apiLog }));
+  },
+  apiAsAdmin: async ({ apiLog }, use) => {
+    const { email, password } = target.users.admin;
+    await use(createToolshopClient({ token: await loginToken(email, password), log: apiLog }));
+  },
 
   data: async ({}, use) => {
     const cleanups: Cleanup[] = [];

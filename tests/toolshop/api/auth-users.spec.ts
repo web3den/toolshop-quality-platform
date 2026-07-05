@@ -1,7 +1,8 @@
-import { test, expect } from '../../src/fixtures/test.fixtures';
-import { unwrap } from '../../src/api/client';
-import { buildUser } from '../../src/data/factories/user.factory';
-import { target } from '../../src/config/env';
+import { test, expect } from '../../../src/fixtures/test.fixtures';
+import { unwrap } from '../../../src/api/client';
+import { registerFreshUser } from '../../../src/api/auth';
+import { buildUser } from '../../../src/data/factories/user.factory';
+import { target } from '../../../src/config/env';
 
 test.describe('Auth & Users API', () => {
   test('registers a new user from factory data @smoke', async ({ api }) => {
@@ -30,18 +31,21 @@ test.describe('Auth & Users API', () => {
   });
 
   test('rejects login with wrong password @smoke', async ({ api }) => {
+    // Disposable account on purpose: failed attempts trigger account lockout
+    // (423) on this SUT, which would poison shared seeded users for everyone.
+    const disposable = await registerFreshUser();
     const res = await api.POST('/users/login', {
-      body: { email: target.users.customer.email, password: 'definitely-wrong' },
+      body: { email: disposable.email, password: 'definitely-wrong' },
     });
     expect(res.response.status).toBe(401);
   });
 
-  test('/users/me requires authentication @smoke @contract', async ({ api, apiAsCustomer }) => {
+  test('/users/me requires authentication @smoke @contract', async ({ api, apiAsCustomer, customerCreds }) => {
     const anon = await api.GET('/users/me');
     expect(anon.response.status).toBe(401);
 
     const me = unwrap(await apiAsCustomer.GET('/users/me')) as { email?: string };
-    expect(me.email).toBe(target.users.customer.email);
+    expect(me.email).toBe(customerCreds.email);
   });
 
   test('customer cannot list all users (RBAC boundary) @regression', async ({ apiAsCustomer, apiAsAdmin }) => {

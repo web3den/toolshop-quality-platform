@@ -1,4 +1,4 @@
-import { test, expect } from '../../src/fixtures/test.fixtures';
+import { test, expect } from '../../../src/fixtures/test.fixtures';
 
 /**
  * Visual regression — layout integrity of revenue-critical pages.

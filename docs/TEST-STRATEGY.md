@@ -2,13 +2,28 @@
 
 ## What gets tested where
 
+### Toolshop (transactional app, third-party)
+
 | Layer | Scope | Budget | Examples |
 | --- | --- | --- | --- |
-| API (`tests/api/`) | every behavior observable over REST | seconds | sorting, search, RBAC boundaries, checkout math, tenant isolation |
+| API (`tests/toolshop/api/`) | every behavior observable over REST | seconds | sorting, search, RBAC boundaries, checkout math, tenant isolation |
 | Contract (`@contract`) | response shapes vs published schema | seconds | zod runtime checks + OpenAPI type-drift gate in CI |
-| E2E (`tests/e2e/`) | behavior that lives in the UI | tens of seconds | checkout wizard, cart badge, login redirects, admin nav |
-| Visual (`tests/visual/`) | layout integrity of key pages | tens of seconds | home/login/contact, dynamic regions masked |
-| A11y (`tests/a11y/`) | WCAG 2.0/2.1 A+AA via axe | seconds | zero critical violations is a hard gate |
+| E2E (`tests/toolshop/e2e/`) | behavior that lives in the UI | tens of seconds | checkout wizard, cart badge, login redirects, admin nav |
+| Visual (`tests/toolshop/visual/`) | layout integrity of key pages | tens of seconds | home/login/contact, dynamic regions masked |
+| A11y (`tests/toolshop/a11y/`) | WCAG 2.0/2.1 A+AA via axe | seconds | zero critical violations is a hard gate |
+
+### ForgeBeyond (static marketing site, self-owned)
+
+| Lane | Scope | Examples |
+| --- | --- | --- |
+| Web/SEO (`tests/forgebeyond/web/`) | discoverability + infrastructure contracts | canonical/meta/h1 per page, robots + sitemap drift gate, redirects, honest 404s, link integrity, deterministic perf budgets |
+| A11y (`tests/forgebeyond/a11y/`) | stricter self-owned bar | critical **and** serious gate, with a self-policing known-issues register (stale entries fail the run) |
+| Visual (`tests/forgebeyond/visual/`) | full-page pixel integrity | no masks — static content, every drift is intentional or a bug |
+
+The layer-choice principle is shared: for a content site, SEO metadata,
+routing behavior, and link integrity *are* the acceptance criteria, and
+deterministic budgets (document bytes, render-blocking scripts) replace
+wall-clock performance assertions that flake on shared runners.
 
 The default layer is the API. A UI test must justify its existence: it covers
 rendering, navigation, or client state that an API test cannot see. Everything
@@ -20,10 +35,13 @@ registered, tokens minted) — the browser only executes the behavior under test
 - `@smoke` — PR-blocking, core paths, fast. Run: `npm run test:smoke`.
 - `@regression` — full functional coverage; PR + nightly.
 - `@contract` — schema conformance.
-- `@a11y`, `@visual` — non-functional gates.
+- `@a11y`, `@visual`, `@seo`, `@perf` — non-functional gates.
 - `@bug-sensitive` — verified to fail on the `with-bugs` build. This tag is
   earned, not declared: you must run the test against the broken build and see
   it fail before adding the tag.
+
+Full tagging rules (and the review checklist that enforces them) live in
+[skills/test-quality-review.md](skills/test-quality-review.md).
 
 ## Falsifiability: the with-bugs lane
 

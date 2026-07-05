@@ -8,7 +8,7 @@
  */
 import { test as setup } from '@playwright/test';
 import fs from 'node:fs';
-import { loginToken } from '../api/auth';
+import { loginToken, resolveCustomerCredentials } from '../api/auth';
 import { target } from '../config/env';
 import { AUTH_DIR, customerStatePath, adminStatePath } from './auth.paths';
 
@@ -26,8 +26,10 @@ function storageStateWithToken(token: string): unknown {
 
 setup('authenticate customer and admin via API', async () => {
   fs.mkdirSync(AUTH_DIR, { recursive: true });
+  // Customer identity is resolved with lockout fallback (shared instance).
+  const customer = await resolveCustomerCredentials();
   const [customerToken, adminToken] = await Promise.all([
-    loginToken(target.users.customer.email, target.users.customer.password),
+    loginToken(customer.email, customer.password),
     loginToken(target.users.admin.email, target.users.admin.password),
   ]);
   fs.writeFileSync(customerStatePath, JSON.stringify(storageStateWithToken(customerToken), null, 2));

@@ -1,5 +1,5 @@
-import { test, expect } from '../../src/fixtures/test.fixtures';
-import { unwrap } from '../../src/api/client';
+import { test, expect } from '../../../src/fixtures/test.fixtures';
+import { unwrap } from '../../../src/api/client';
 
 interface ProductLite {
   id: string;

@@ -3,19 +3,24 @@
 ## Layer map and dependency rules
 
 ```
-tests/**            (specs: intent + assertions only)
+tests/<product>/**  (specs: intent + assertions only; one product per tree)
   │ may import
   ▼
-src/fixtures/**     (composition root: pages + api + data lifecycle)
-  │
-  ├─ src/pages/**   (POM — owns every selector; data-test contract only)
-  ├─ src/api/**     (typed client over generated OpenAPI schema + auth cache)
+src/fixtures/**     (per-product composition roots:
+  │                  test.fixtures.ts → Toolshop, forgebeyond.fixtures.ts → FB)
+  ├─ src/pages/**   (POM — owns every selector; data-test contract for
+  │                  Toolshop, accessibility tree for ForgeBeyond)
+  ├─ src/api/**     (typed client + lockout-aware auth + ApiLog redacted
+  │                  transcript middleware)
   ├─ src/data/**    (factories, builders, API seeding)
-  └─ src/utils/**   (poller, parallel helpers — no Playwright imports)
+  └─ src/utils/**   (poller, parallel helpers, redaction — no Playwright deps)
 
 src/api/generated/** is machine-written (npm run generate:types). Read-only.
-src/config/env.ts    is the single source of truth for targets/credentials.
+src/config/         env.ts (Toolshop targets) + products.ts (registry).
 ```
+
+Products never share fixtures or page objects; they share the utility layer
+and the conventions (ADR-0005).
 
 Two of these boundaries are enforced mechanically by ESLint, not by convention:
 specs cannot call `page.locator(...)` (selectors belong to page objects) and
@@ -50,9 +55,26 @@ misshapen body is a compile error, not a 3 a.m. CI failure.
   is the SUT itself (`resolveBillingAddress()`). The page object mirrors this:
   the billing form takes country + postcode + house number, like the real UI.
 
+## Observability & redaction
+
+Every request through the typed client is captured by `ApiLog`
+(`src/api/logging.ts`), an `openapi-fetch` middleware wired per test by the
+fixture layer. Each test's report carries `api-log.json` (machine-readable)
+and `api-transcript.txt` (human-readable request/response blocks with
+timings). Everything passes through `src/utils/redact.ts` first: sensitive
+keys (password/token/authorization/cookie/…) are masked with a length hint,
+JWT/Bearer blobs are scrubbed from free text, and bodies are truncated at 4KB
+so one fat response can't drown a report. `unwrap()` assertion messages go
+through the same module — there is no unredacted output path.
+
 ## Auth model
 
 API-side: one JWT per (user, target), cached per worker (`src/api/auth.ts`).
+The shared public instance locks accounts after failed logins (HTTP 423), so
+the customer identity is *resolved*, not assumed: seeded customer →
+customer2 → freshly registered disposable account, persisted to `.auth/` so
+the setup project and all workers agree per run. Negative-credential tests
+always use disposable accounts (`registerFreshUser()`).
 Browser-side: a `setup` project logs in via the API and plants the token into
 `localStorage['auth-token']` — exactly where the Angular `TokenStorageService`
 reads it — then saves `storageState` per role. Browser tests start
@@ -78,10 +100,21 @@ Three tools, in order of preference:
 
 ## Execution lanes
 
-Playwright *projects* are lanes (api / setup / e2e-chromium / visual / a11y),
-*tags* are filters (@smoke / @regression / @contract / @a11y / @visual /
+Playwright *projects* are product-prefixed lanes (`toolshop-api`,
+`toolshop-e2e`, `toolshop-visual`, `toolshop-a11y`, `forgebeyond-web`,
+`forgebeyond-a11y`, `forgebeyond-visual`); *tags* are product-agnostic filters
+(@smoke / @regression / @contract / @a11y / @visual / @seo / @perf /
 @bug-sensitive). Lanes give CI structure (the API lane needs no browser and
 returns signal in seconds); tags give selection within and across lanes.
+Visual baselines key on project name, so products cannot pollute each other's
+screenshots.
+
+## Reporting
+
+CI lanes all write Allure results; a dedicated job merges them, restores
+trend history from the `gh-pages` branch, regenerates, and republishes — one
+stable URL with pass-rate/duration trends across runs. The Playwright HTML
+report (traces, videos, API transcripts) stays the engineering artifact.
 
 ## Targets
 

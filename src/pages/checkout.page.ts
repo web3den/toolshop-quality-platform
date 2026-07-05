@@ -64,15 +64,22 @@ export class CheckoutPage extends BasePage {
     await this.houseNumber.fill(address.house_number);
     // Auto-fill is complete once the lookup response populates the city.
     await expect(this.city).not.toHaveValue('', { timeout: 15_000 });
-    // The faker-backed lookup sometimes returns no street/state. The form
-    // requires them client-side, and the server only cross-validates fields
-    // its own lookup returned — so a fallback for blanks is contract-safe.
-    for (const field of [this.street, this.state]) {
-      if ((await field.inputValue()) === '') {
-        await field.fill('N/A');
-      }
-    }
-    await expect(this.proceedFromAddress).toBeEnabled();
+    // The faker-backed lookup sometimes returns no street/state, and its
+    // response can land *after* the first blank-check and clear a field we
+    // just filled. The form requires them client-side while the server only
+    // cross-validates fields its own lookup returned — so keep re-filling
+    // blanks until the whole form is stable and the button unlocks.
+    await expect
+      .poll(
+        async () => {
+          for (const field of [this.street, this.state]) {
+            if ((await field.inputValue()) === '') await field.fill('N/A');
+          }
+          return this.proceedFromAddress.isEnabled();
+        },
+        { message: 'proceed-to-payment button never became enabled', timeout: 15_000 },
+      )
+      .toBe(true);
     await this.proceedFromAddress.click();
   }
 

@@ -1,5 +1,5 @@
 import AxeBuilder from '@axe-core/playwright';
-import { test, expect } from '../../src/fixtures/test.fixtures';
+import { test, expect } from '../../../src/fixtures/test.fixtures';
 
 /**
  * Accessibility scans on the highest-traffic pages.

@@ -1,7 +1,5 @@
-import { test, expect } from '../../src/fixtures/test.fixtures';
-import { customerStatePath } from '../../src/fixtures/auth.paths';
-import { target } from '../../src/config/env';
-
+import { test, expect } from '../../../src/fixtures/test.fixtures';
+import { customerStatePath } from '../../../src/fixtures/auth.paths';
 test.describe('Shopping journey', () => {
   test('guest browses, searches, and inspects a product @smoke', async ({ home, productDetail }) => {
     await home.open();
@@ -43,6 +41,7 @@ test.describe('Shopping journey', () => {
     productDetail,
     header,
     checkout,
+    customerCreds,
   }) => {
     await home.open();
     await home.openFirstProduct();
@@ -53,7 +52,7 @@ test.describe('Shopping journey', () => {
     await expect(checkout.proceedFromCart).toBeVisible();
     await checkout.proceedFromCart.click();
 
-    await checkout.signInDuringCheckout(target.users.customer.email, target.users.customer.password);
+    await checkout.signInDuringCheckout(customerCreds.email, customerCreds.password);
 
     // Country + postcode + house number; the app auto-fills the rest from its
     // postcode-lookup service (free-typed city/state is rejected server-side).
