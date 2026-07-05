@@ -1,4 +1,0 @@
-[auth] seeded account unusable (customer@practicesoftwaretesting.com): Error: API call failed: 401 https://api.practicesoftwaretesting.com/users/login
-{
-  "error": "Unauthorized"
-}

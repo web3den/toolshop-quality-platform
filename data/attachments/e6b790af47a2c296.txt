@@ -1,0 +1,1 @@
+[auth] seeded account unusable (customer@practicesoftwaretesting.com): AccountLockedError: Account customer@practicesoftwaretesting.com is locked (423) on production

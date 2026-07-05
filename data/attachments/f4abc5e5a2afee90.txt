@@ -1,0 +1,51 @@
+#1 POST https://api.practicesoftwaretesting.com/users/register
+→ {"accept":"application/json","content-type":"application/json"}
+{
+  "first_name": "Kayden",
+  "last_name": "Herman",
+  "address": {
+    "street": "69714 Honeysuckle Close",
+    "house_number": "821",
+    "city": "Rosenbaummouth",
+    "state": "Idaho",
+    "country": "US",
+    "postal_code": "17743"
+  },
+  "phone": "7877533450",
+  "dob": "1993-10-15",
+  "password": "Aa1…«redacted»…8z (len=16)",
+  "email": "tqp.mr84i1c0.2178.1.3wo3wwdj@example.com"
+}
+← 201 (999ms) {"access-control-allow-origin":"*","access-control-expose-headers":"Content-Disposition","cache-control":"no-cache, private","connection":"Upgrade, close","content-type":"application/json","date":"Sun, 05 Jul 2026 18:27:03 GMT","server":"Apache/2.4.52 (Ubuntu)","transfer-encoding":"chunked","upgrade":"h2"}
+{
+  "first_name": "Kayden",
+  "last_name": "Herman",
+  "phone": "7877533450",
+  "dob": "1993-10-15",
+  "email": "tqp.mr84i1c0.2178.1.3wo3wwdj@example.com",
+  "id": "01kwsrhbpsg9r7nrenmj3yt3mb",
+  "created_at": "2026-07-05 18:27:03",
+  "address": {
+    "street": "69714 Honeysuckle Close",
+    "house_number": "821",
+    "city": "Rosenbaummouth",
+    "state": "Idaho",
+    "country": "US",
+    "postal_code": "17743"
+  }
+}
+
+────────────────────────────────────────────────────────────────────────
+
+#2 POST https://api.practicesoftwaretesting.com/users/login
+→ {"accept":"application/json","content-type":"application/json"}
+{
+  "email": "tqp.mr84i1c0.2178.1.3wo3wwdj@example.com",
+  "password": "Aa1…«redacted»…8z (len=16)"
+}
+← 200 (548ms) {"access-control-allow-origin":"*","access-control-expose-headers":"Content-Disposition","cache-control":"no-cache, private","connection":"Upgrade, close","content-encoding":"gzip","content-length":"382","content-type":"application/json","date":"Sun, 05 Jul 2026 18:27:04 GMT","server":"Apache/2.4.52 (Ubuntu)","upgrade":"h2","vary":"Accept-Encoding"}
+{
+  "access_token": "eyJ…«redacted»…eM (len=395)",
+  "token_type": "«redacted»",
+  "expires_in": 300
+}

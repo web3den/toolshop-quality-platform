@@ -1,0 +1,36 @@
+#1 POST https://api.practicesoftwaretesting.com/users/register
+→ {"accept":"application/json","content-type":"application/json"}
+{
+  "first_name": "Carmella",
+  "last_name": "Lakin",
+  "address": {
+    "street": "7294 Duke Street",
+    "house_number": "426",
+    "city": "Flatleyport",
+    "state": "Utah",
+    "country": "US",
+    "postal_code": "33318"
+  },
+  "phone": "5822556235",
+  "dob": "1972-03-02",
+  "password": "Aa1…«redacted»…Vd (len=16)",
+  "email": "tqp.mr84ikf1.3152.1.wrizrgye@example.com"
+}
+← 201 (631ms) {"access-control-allow-origin":"*","access-control-expose-headers":"Content-Disposition","cache-control":"no-cache, private","connection":"Upgrade, close","content-type":"application/json","date":"Sun, 05 Jul 2026 18:27:27 GMT","server":"Apache/2.4.52 (Ubuntu)","transfer-encoding":"chunked","upgrade":"h2"}
+{
+  "first_name": "Carmella",
+  "last_name": "Lakin",
+  "phone": "5822556235",
+  "dob": "1972-03-02",
+  "email": "tqp.mr84ikf1.3152.1.wrizrgye@example.com",
+  "id": "01kwsrj3gy84wg4fvm3f0tdth3",
+  "created_at": "2026-07-05 18:27:27",
+  "address": {
+    "street": "7294 Duke Street",
+    "house_number": "426",
+    "city": "Flatleyport",
+    "state": "Utah",
+    "country": "US",
+    "postal_code": "33318"
+  }
+}
