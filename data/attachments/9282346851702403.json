@@ -1,0 +1,165 @@
+[
+  {
+    "seq": 1,
+    "method": "GET",
+    "url": "https://api.practicesoftwaretesting.com/categories/tree",
+    "status": 200,
+    "durationMs": 462,
+    "requestHeaders": {
+      "accept": "application/json"
+    },
+    "requestBody": null,
+    "responseHeaders": {
+      "access-control-allow-origin": "*",
+      "access-control-expose-headers": "Content-Disposition",
+      "cache-control": "max-age=120, public",
+      "connection": "Upgrade, close",
+      "content-encoding": "gzip",
+      "content-length": "433",
+      "content-type": "application/json",
+      "date": "Sun, 05 Jul 2026 18:03:27 GMT",
+      "etag": "\"71a3a6f4a3062cb98af0b823b13cb0da-gzip\"",
+      "server": "Apache/2.4.52 (Ubuntu)",
+      "upgrade": "h2",
+      "vary": "Accept-Encoding"
+    },
+    "responseBody": [
+      {
+        "id": "01KWSQ0D8SME9W4C2SK3WA549J",
+        "name": "Hand Tools",
+        "slug": "hand-tools",
+        "parent_id": null,
+        "sub_categories": [
+          {
+            "id": "01KWSQ0D93MCWB5Z9GDEPGVJD5",
+            "name": "Hammer",
+            "slug": "hammer",
+            "parent_id": "01KWSQ0D8SME9W4C2SK3WA549J",
+            "sub_categories": []
+          },
+          {
+            "id": "01KWSQ0D93MCWB5Z9GDEPGVJD6",
+            "name": "Hand Saw",
+            "slug": "hand-saw",
+            "parent_id": "01KWSQ0D8SME9W4C2SK3WA549J",
+            "sub_categories": []
+          },
+          {
+            "id": "01KWSQ0D93MCWB5Z9GDEPGVJD7",
+            "name": "Wrench",
+            "slug": "wrench",
+            "parent_id": "01KWSQ0D8SME9W4C2SK3WA549J",
+            "sub_categories": []
+          },
+          {
+            "id": "01KWSQ0D93MCWB5Z9GDEPGVJD8",
+            "name": "Screwdriver",
+            "slug": "screwdriver",
+            "parent_id": "01KWSQ0D8SME9W4C2SK3WA549J",
+            "sub_categories": []
+          },
+          {
+            "id": "01KWSQ0D93MCWB5Z9GDEPGVJD9",
+            "name": "Pliers",
+            "slug": "pliers",
+            "parent_id": "01KWSQ0D8SME9W4C2SK3WA549J",
+            "sub_categories": []
+          },
+          {
+            "id": "01KWSQ0D93MCWB5Z9GDEPGVJDA",
+            "name": "Chisels",
+            "slug": "chisels",
+            "parent_id": "01KWSQ0D8SME9W4C2SK3WA549J",
+            "sub_categories": []
+          },
+          {
+            "id": "01KWSQ0D93MCWB5Z9GDEPGVJDB",
+            "name": "Measures",
+            "slug": "measures",
+            "parent_id": "01KWSQ0D8SME9W4C2SK3WA549J",
+            "sub_categories": []
+          }
+        ]
+      },
+      {
+        "id": "01KWSQ0D8SME9W4C2SK3WA549K",
+        "name": "Power Tools",
+        "slug": "power-tools",
+        "parent_id": null,
+        "sub_categories": [
+          {
+            "id": "01KWSQ0D93MCWB5Z9GDEPGVJDC",
+            "name": "Grinder",
+            "slug": "grinder",
+            "parent_id": "01KWSQ0D8SME9W4C2SK3WA549K",
+            "sub_categories": []
+          },
+          {
+            "id": "01KWSQ0D93MCWB5Z9GDEPGVJDD",
+            "name": "Sander",
+            "slug": "sander",
+            "parent_id": "01KWSQ0D8SME9W4C2SK3WA549K",
+            "sub_categories": []
+          },
+          {
+            "id": "01KWSQ0D93MCWB5Z9GDEPGVJDE",
+            "name": "Saw",
+            "slug": "saw",
+            "parent_id": "01KWSQ0D8SME9W4C2SK3WA549K",
+            "sub_categories": []
+          },
+          {
+            "id": "01KWSQ0D93MCWB5Z9GDEPGVJDF",
+            "name": "Drill",
+            "slug": "drill",
+            "parent_id": "01KWSQ0D8SME9W4C2SK3WA549K",
+            "sub_categories": []
+          }
+        ]
+      },
+      {
+        "id": "01KWSQ0D8SME9W4C2SK3WA549M",
+        "name": "Other",
+        "slug": "other",
+        "parent_id": null,
+        "sub_categories": [
+          {
+            "id": "01KWSQ0D93MCWB5Z9GDEPGVJDG",
+            "name": "Tool Belts",
+            "slug": "tool-belts",
+            "parent_id": "01KWSQ0D8SME9W4C2SK3WA549M",
+            "sub_categories": []
+          },
+          {
+            "id": "01KWSQ0D93MCWB5Z9GDEPGVJDH",
+            "name": "Storage Solutions",
+            "slug": "storage solutions",
+            "parent_id": "01KWSQ0D8SME9W4C2SK3WA549M",
+            "sub_categories": []
+          },
+          {
+            "id": "01KWSQ0D93MCWB5Z9GDEPGVJDJ",
+            "name": "Workbench",
+            "slug": "workbench",
+            "parent_id": "01KWSQ0D8SME9W4C2SK3WA549M",
+            "sub_categories": []
+          },
+          {
+            "id": "01KWSQ0D93MCWB5Z9GDEPGVJDK",
+            "name": "Safety Gear",
+            "slug": "safety-gear",
+            "parent_id": "01KWSQ0D8SME9W4C2SK3WA549M",
+            "sub_categories": []
+          },
+          {
+            "id": "01KWSQ0D93MCWB5Z9GDEPGVJDM",
+            "name": "Fasteners",
+            "slug": "fasteners",
+            "parent_id": "01KWSQ0D8SME9W4C2SK3WA549M",
+            "sub_categories": []
+          }
+        ]
+      }
+    ]
+  }
+]

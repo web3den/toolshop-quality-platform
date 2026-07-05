@@ -1,0 +1,6 @@
+#1 GET https://api.practicesoftwaretesting.com/products/01INVALIDULIDXXXXXXXXXXXXX
+→ {"accept":"application/json"}
+← 404 (457ms) {"access-control-allow-origin":"*","access-control-expose-headers":"Content-Disposition","cache-control":"no-cache, private","connection":"Upgrade, close","content-type":"application/json","date":"Sun, 05 Jul 2026 18:03:28 GMT","server":"Apache/2.4.52 (Ubuntu)","transfer-encoding":"chunked","upgrade":"h2"}
+{
+  "message": "Requested item not found"
+}

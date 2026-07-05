@@ -1,0 +1,104 @@
+[
+  {
+    "id": "list",
+    "impact": "serious",
+    "tags": [
+      "cat.structure",
+      "wcag2a",
+      "wcag131",
+      "EN-301-549",
+      "EN-9.1.3.1",
+      "RGAAv4",
+      "RGAA-9.3.1"
+    ],
+    "description": "Ensure that lists are structured correctly",
+    "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements",
+    "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/list?application=playwright",
+    "nodes": [
+      {
+        "any": [],
+        "all": [],
+        "none": [
+          {
+            "id": "only-listitems",
+            "data": {
+              "values": "fieldset"
+            },
+            "relatedNodes": [
+              {
+                "html": "<fieldset _ngcontent-ng-c670033506=\"\">",
+                "target": [
+                  ".checkbox:nth-child(2) > ul > fieldset"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "List element has direct children that are not allowed: fieldset"
+          }
+        ],
+        "impact": "serious",
+        "html": "<ul _ngcontent-ng-c670033506=\"\">",
+        "target": [
+          ".checkbox:nth-child(2) > ul"
+        ],
+        "failureSummary": "Fix all of the following:\n  List element has direct children that are not allowed: fieldset"
+      },
+      {
+        "any": [],
+        "all": [],
+        "none": [
+          {
+            "id": "only-listitems",
+            "data": {
+              "values": "fieldset"
+            },
+            "relatedNodes": [
+              {
+                "html": "<fieldset _ngcontent-ng-c670033506=\"\">",
+                "target": [
+                  ".checkbox:nth-child(3) > ul > fieldset"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "List element has direct children that are not allowed: fieldset"
+          }
+        ],
+        "impact": "serious",
+        "html": "<ul _ngcontent-ng-c670033506=\"\">",
+        "target": [
+          ".checkbox:nth-child(3) > ul"
+        ],
+        "failureSummary": "Fix all of the following:\n  List element has direct children that are not allowed: fieldset"
+      },
+      {
+        "any": [],
+        "all": [],
+        "none": [
+          {
+            "id": "only-listitems",
+            "data": {
+              "values": "fieldset"
+            },
+            "relatedNodes": [
+              {
+                "html": "<fieldset _ngcontent-ng-c670033506=\"\">",
+                "target": [
+                  ".checkbox:nth-child(4) > ul > fieldset"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "List element has direct children that are not allowed: fieldset"
+          }
+        ],
+        "impact": "serious",
+        "html": "<ul _ngcontent-ng-c670033506=\"\">",
+        "target": [
+          ".checkbox:nth-child(4) > ul"
+        ],
+        "failureSummary": "Fix all of the following:\n  List element has direct children that are not allowed: fieldset"
+      }
+    ]
+  }
+]

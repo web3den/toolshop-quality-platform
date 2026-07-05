@@ -1,0 +1,45 @@
+[
+  {
+    "seq": 1,
+    "method": "POST",
+    "url": "https://api.practicesoftwaretesting.com/users/register",
+    "status": 409,
+    "durationMs": 779,
+    "requestHeaders": {
+      "accept": "application/json",
+      "content-type": "application/json"
+    },
+    "requestBody": {
+      "first_name": "Marjory",
+      "last_name": "Ebert",
+      "address": {
+        "street": "964 Torphy Square",
+        "house_number": "797",
+        "city": "Port Brendanbury",
+        "state": "Missouri",
+        "country": "US",
+        "postal_code": "75940"
+      },
+      "phone": "1967559998",
+      "dob": "1987-08-30",
+      "password": "Aa1…«redacted»…Gt (len=16)",
+      "email": "customer@practicesoftwaretesting.com"
+    },
+    "responseHeaders": {
+      "access-control-allow-origin": "*",
+      "access-control-expose-headers": "Content-Disposition",
+      "cache-control": "no-cache, private",
+      "connection": "Upgrade, close",
+      "content-type": "application/json",
+      "date": "Sun, 05 Jul 2026 18:03:22 GMT",
+      "server": "Apache/2.4.52 (Ubuntu)",
+      "transfer-encoding": "chunked",
+      "upgrade": "h2"
+    },
+    "responseBody": {
+      "email": [
+        "A customer with this email address already exists."
+      ]
+    }
+  }
+]

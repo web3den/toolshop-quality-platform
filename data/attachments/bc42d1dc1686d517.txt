@@ -1,0 +1,51 @@
+#1 POST https://api.practicesoftwaretesting.com/users/register
+→ {"accept":"application/json","content-type":"application/json"}
+{
+  "first_name": "Jaron",
+  "last_name": "Shanahan",
+  "address": {
+    "street": "2156 Rolfson Viaduct",
+    "house_number": "158",
+    "city": "Port Ivyburgh",
+    "state": "Virginia",
+    "country": "US",
+    "postal_code": "50257"
+  },
+  "phone": "4012226488",
+  "dob": "1999-10-15",
+  "password": "Aa1…«redacted»…L5 (len=16)",
+  "email": "tqp.mr83nl9p.2373.1.iihfx8o7@example.com"
+}
+← 201 (1005ms) {"access-control-allow-origin":"*","access-control-expose-headers":"Content-Disposition","cache-control":"no-cache, private","connection":"Upgrade, close","content-type":"application/json","date":"Sun, 05 Jul 2026 18:03:23 GMT","server":"Apache/2.4.52 (Ubuntu)","transfer-encoding":"chunked","upgrade":"h2"}
+{
+  "first_name": "Jaron",
+  "last_name": "Shanahan",
+  "phone": "4012226488",
+  "dob": "1999-10-15",
+  "email": "tqp.mr83nl9p.2373.1.iihfx8o7@example.com",
+  "id": "01kwsq60gcqkpy8yxwhzcgtyc4",
+  "created_at": "2026-07-05 18:03:23",
+  "address": {
+    "street": "2156 Rolfson Viaduct",
+    "house_number": "158",
+    "city": "Port Ivyburgh",
+    "state": "Virginia",
+    "country": "US",
+    "postal_code": "50257"
+  }
+}
+
+────────────────────────────────────────────────────────────────────────
+
+#2 POST https://api.practicesoftwaretesting.com/users/login
+→ {"accept":"application/json","content-type":"application/json"}
+{
+  "email": "tqp.mr83nl9p.2373.1.iihfx8o7@example.com",
+  "password": "Aa1…«redacted»…L5 (len=16)"
+}
+← 200 (630ms) {"access-control-allow-origin":"*","access-control-expose-headers":"Content-Disposition","cache-control":"no-cache, private","connection":"Upgrade, close","content-encoding":"gzip","content-length":"382","content-type":"application/json","date":"Sun, 05 Jul 2026 18:03:23 GMT","server":"Apache/2.4.52 (Ubuntu)","upgrade":"h2","vary":"Accept-Encoding"}
+{
+  "access_token": "eyJ…«redacted»…CA (len=395)",
+  "token_type": "«redacted»",
+  "expires_in": 300
+}

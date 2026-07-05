@@ -1,0 +1,57 @@
+[
+  {
+    "seq": 1,
+    "method": "POST",
+    "url": "https://api.practicesoftwaretesting.com/users/register",
+    "status": 201,
+    "durationMs": 734,
+    "requestHeaders": {
+      "accept": "application/json",
+      "content-type": "application/json"
+    },
+    "requestBody": {
+      "first_name": "Geovany",
+      "last_name": "Rau",
+      "address": {
+        "street": "60991 Hoyt Trafficway",
+        "house_number": "490",
+        "city": "Sunnyton",
+        "state": "Montana",
+        "country": "US",
+        "postal_code": "10587"
+      },
+      "phone": "1626299261",
+      "dob": "1991-04-16",
+      "password": "Aa1…«redacted»…ey (len=16)",
+      "email": "tqp.mr83o90v.3159.1.qfndppqu@example.com"
+    },
+    "responseHeaders": {
+      "access-control-allow-origin": "*",
+      "access-control-expose-headers": "Content-Disposition",
+      "cache-control": "no-cache, private",
+      "connection": "Upgrade, close",
+      "content-type": "application/json",
+      "date": "Sun, 05 Jul 2026 18:03:53 GMT",
+      "server": "Apache/2.4.52 (Ubuntu)",
+      "transfer-encoding": "chunked",
+      "upgrade": "h2"
+    },
+    "responseBody": {
+      "first_name": "Geovany",
+      "last_name": "Rau",
+      "phone": "1626299261",
+      "dob": "1991-04-16",
+      "email": "tqp.mr83o90v.3159.1.qfndppqu@example.com",
+      "id": "01kwsq6yaj25yk6m43my8kt35w",
+      "created_at": "2026-07-05 18:03:53",
+      "address": {
+        "street": "60991 Hoyt Trafficway",
+        "house_number": "490",
+        "city": "Sunnyton",
+        "state": "Montana",
+        "country": "US",
+        "postal_code": "10587"
+      }
+    }
+  }
+]
