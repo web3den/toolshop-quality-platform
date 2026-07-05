@@ -1,0 +1,48 @@
+[
+  {
+    "seq": 1,
+    "method": "POST",
+    "url": "https://api.practicesoftwaretesting.com/users/register",
+    "status": 422,
+    "durationMs": 539,
+    "requestHeaders": {
+      "accept": "application/json",
+      "content-type": "application/json"
+    },
+    "requestBody": {
+      "first_name": "Antonette",
+      "last_name": "Hartmann",
+      "address": {
+        "street": "59745 Douglas Road",
+        "house_number": "425",
+        "city": "Fort Berenice",
+        "state": "North Dakota",
+        "country": "US",
+        "postal_code": "03917"
+      },
+      "phone": "5376163410",
+      "dob": "1986-04-14",
+      "password": "«redacted»",
+      "email": "tqp.mr8585yc.2402.2.swicb8dd@example.com"
+    },
+    "responseHeaders": {
+      "access-control-allow-origin": "*",
+      "access-control-expose-headers": "Content-Disposition",
+      "cache-control": "no-cache, private",
+      "connection": "Upgrade, close",
+      "content-type": "application/json",
+      "date": "Sun, 05 Jul 2026 18:47:22 GMT",
+      "server": "Apache/2.4.52 (Ubuntu)",
+      "transfer-encoding": "chunked",
+      "upgrade": "h2"
+    },
+    "responseBody": {
+      "password": [
+        "The password field must be at least 8 characters.",
+        "The password field must contain at least one uppercase and one lowercase letter.",
+        "The password field must contain at least one symbol.",
+        "The password field must contain at least one number."
+      ]
+    }
+  }
+]

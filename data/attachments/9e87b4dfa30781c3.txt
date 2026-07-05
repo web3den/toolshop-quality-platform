@@ -1,0 +1,900 @@
+#1 GET https://api.practicesoftwaretesting.com/invoices
+→ {"accept":"application/json","authorization":"«redacted»"}
+← 200 (500ms) {"access-control-allow-origin":"*","access-control-expose-headers":"Content-Disposition","cache-control":"no-cache, private","connection":"Upgrade, close","content-encoding":"gzip","content-length":"1692","content-type":"application/json","date":"Sun, 05 Jul 2026 18:47:25 GMT","server":"Apache/2.4.52 (Ubuntu)","upgrade":"h2","vary":"Authorization,Accept-Encoding"}
+{
+  "current_page": 1,
+  "data": [
+    {
+      "id": "01kwsspmmtzs8fmf865nf4nxeb",
+      "user_id": "01KWSQ0D3Q1S5W9JP16WFPF6N1",
+      "invoice_number": "INV-2026000029",
+      "invoice_date": "2026-07-05 18:47:25",
+      "status": "AWAITING_FULFILLMENT",
+      "total": 26.16,
+      "subtotal": 26.16,
+      "billing_street": "Cheyenne Meadow 141",
+      "billing_city": "North Samir",
+      "billing_state": "Vermont",
+      "billing_country": "US",
+      "billing_postal_code": "78701",
+      "additional_discount_percentage": null,
+      "additional_discount_amount": 0,
+      "invoicelines": [
+        {
+          "id": "01kwsspmn98fj0dtwjz0sfge01",
+          "invoice_id": "01kwsspmmtzs8fmf865nf4nxeb",
+          "product_id": "01KWSQ0DA788PRRHPT6FTN14WV",
+          "unit_price": 12.01,
+          "quantity": 1,
+          "discount_percentage": null,
+          "discounted_price": null,
+          "product": {
+            "id": "01KWSQ0DA788PRRHPT6FTN14WV",
+            "name": "Pliers",
+            "price": 12.01,
+            "co2_rating": "D",
+            "in_stock": false,
+            "is_eco_friendly": false,
+            "product_image": {
+              "id": "01KWSQ0D9G129Q4Q5SGCCKY7T9",
+              "by_name": "Everyday basics",
+              "by_url": "https://unsplash.com/@zanardi",
+              "source_name": "Unsplash",
+              "source_url": "https://unsplash.com/photos/I8eTuMmxIfo",
+              "file_name": "pliers02.avif",
+              "title": "Pliers"
+            }
+          }
+        },
+        {
+          "id": "01kwsspmnj4ed2j4wjhm1e1n04",
+          "invoice_id": "01kwsspmmtzs8fmf865nf4nxeb",
+          "product_id": "01KWSQ0DA48YDSKBHD8GQ8TJ6T",
+          "unit_price": 14.15,
+          "quantity": 1,
+          "discount_percentage": null,
+          "discounted_price": null,
+          "product": {
+            "id": "01KWSQ0DA48YDSKBHD8GQ8TJ6T",
+            "name": "Combination Pliers",
+            "price": 14.15,
+            "co2_rating": "D",
+            "in_stock": false,
+            "is_eco_friendly": false,
+            "product_image": {
+              "id": "01KWSQ0D9G129Q4Q5SGCCKY7T8",
+              "by_name": "Helinton Fantin",
+              "by_url": "https://unsplash.com/@fantin",
+              "source_name": "Unsplash",
+              "source_url": "https://unsplash.com/photos/W8BNwvOvW4M",
+              "file_name": "pliers01.avif",
+              "title": "Combination pliers"
+            }
+          }
+        }
+      ],
+      "payment": {
+        "payment_method": "cash-on-delivery"
+      }
+    },
+    {
+      "id": "01kwsspm7x949be3nfakjh8t0y",
+      "user_id": "01KWSQ0D3Q1S5W9JP16WFPF6N1",
+      "invoice_number": "INV-2026000028",
+      "invoice_date": "2026-07-05 18:47:24",
+      "status": "AWAITING_FULFILLMENT",
+      "total": 14.15,
+      "subtotal": 14.15,
+      "billing_street": "Cheyenne Meadow 141",
+      "billing_city": "North Samir",
+      "billing_state": "Vermont",
+      "billing_country": "US",
+      "billing_postal_code": "78701",
+      "additional_discount_percentage": null,
+      "additional_discount_amount": 0,
+      "invoicelines": [
+        {
+          "id": "01kwsspm8bgpqzfc12c58epw9a",
+          "invoice_id": "01kwsspm7x949be3nfakjh8t0y",
+          "product_id": "01KWSQ0DA48YDSKBHD8GQ8TJ6T",
+          "unit_price": 14.15,
+          "quantity": 1,
+          "discount_percentage": null,
+          "discounted_price": null,
+          "product": {
+            "id": "01KWSQ0DA48YDSKBHD8GQ8TJ6T",
+            "name": "Combination Pliers",
+            "price": 14.15,
+            "co2_rating": "D",
+            "in_stock": false,
+            "is_eco_friendly": false,
+            "product_image": {
+              "id": "01KWSQ0D9G129Q4Q5SGCCKY7T8",
+              "by_name": "Helinton Fantin",
+              "by_url": "https://unsplash.com/@fantin",
+              "source_name": "Unsplash",
+              "source_url": "https://unsplash.com/photos/W8BNwvOvW4M",
+              "file_name": "pliers01.avif",
+              "title": "Combination pliers"
+            }
+          }
+        }
+      ],
+      "payment": {
+        "payment_method": "credit-card"
+      }
+    },
+    {
+      "id": "01kwssmqsnq3ag1jk8h91medmx",
+      "user_id": "01KWSQ0D3Q1S5W9JP16WFPF6N1",
+      "invoice_number": "INV-2026000027",
+      "invoice_date": "2026-07-05 18:46:22",
+      "status": "AWAITING_FULFILLMENT",
+      "total": 26.16,
+      "subtotal": 26.16,
+      "billing_street": "Cheyenne Meadow 141",
+      "billing_city": "North Samir",
+      "billing_state": "Vermont",
+      "billing_country": "US",
+      "billing_postal_code": "78701",
+      "additional_discount_percentage": null,
+      "additional_discount_amount": 0,
+      "invoicelines": [
+        {
+          "id": "01kwssmqt4sgvdv47edgr4hpds",
+          "invoice_id": "01kwssmqsnq3ag1jk8h91medmx",
+          "product_id": "01KWSQ0DA788PRRHPT6FTN14WV",
+          "unit_price": 12.01,
+          "quantity": 1,
+          "discount_percentage": null,
+          "discounted_price": null,
+          "product": {
+            "id": "01KWSQ0DA788PRRHPT6FTN14WV",
+            "name": "Pliers",
+            "price": 12.01,
+            "co2_rating": "D",
+            "in_stock": false,
+            "is_eco_friendly": false,
+            "product_image": {
+              "id": "01KWSQ0D9G129Q4Q5SGCCKY7T9",
+              "by_name": "Everyday basics",
+              "by_url": "https://unsplash.com/@zanardi",
+              "source_name": "Unsplash",
+              "source_url": "https://unsplash.com/photos/I8eTuMmxIfo",
+              "file_name": "pliers02.avif",
+              "title": "Pliers"
+            }
+          }
+        },
+        {
+          "id": "01kwssmqtey30m57g69fw72esz",
+          "invoice_id": "01kwssmqsnq3ag1jk8h91medmx",
+          "product_id": "01KWSQ0DA48YDSKBHD8GQ8TJ6T",
+          "unit_price": 14.15,
+          "quantity": 1,
+          "discount_percentage": null,
+          "discounted_price": null,
+          "product": {
+            "id": "01KWSQ0DA48YDSKBHD8GQ8TJ6T",
+            "name": "Combination Pliers",
+            "price": 14.15,
+            "co2_rating": "D",
+            "in_stock": false,
+            "is_eco_friendly": false,
+            "product_image": {
+              "id": "01KWSQ0D9G129Q4Q5SGCCKY7T8",
+              "by_name": "Helinton Fantin",
+              "by_url": "https://unsplash.com/@fantin",
+              "source_name": "Unsplash",
+              "source_url": "https://unsplash.com/photos/W8BNwvOvW4M",
+              "file_name": "pliers01.avif",
+              "title": "Combination pliers"
+            }
+          }
+        }
+      ],
+      "payment": {
+        "payment_method": "cash-on-delivery"
+      }
+    },
+    {
+      "id": "01kwssmqj5xmpebste7hpn3953",
+      "user_id": "01KWSQ0D3Q1S5W9JP16WFPF6N1",
+      "invoice_number": "INV-2026000026",
+      "invoice_date": "2026-07-05 18:46:22",
+      "status": "AWAITING_FULFILLMENT",
+      "total": 14.15,
+      "subtotal": 14.15,
+      "billing_street": "Cheyenne Meadow 141",
+      "billing_city": "North Samir",
+      "billing_state": "Vermont",
+      "billing_country": "US",
+      "billing_postal_code": "78701",
+      "additional_discount_percentage": null,
+      "additional_discount_amount": 0,
+      "invoicelines": [
+        {
+          "id": "01kwssmqjj3qj8nmrg78s2n1vp",
+          "invoice_id": "01kwssmqj5xmpebste7hpn3953",
+          "product_id": "01KWSQ0DA48YDSKBHD8GQ8TJ6T",
+          "unit_price": 14.15,
+          "quantity": 1,
+          "discount_percentage": null,
+          "discounted_price": null,
+          "product": {
+            "id": "01KWSQ0DA48YDSKBHD8GQ8TJ6T",
+            "name": "Combination Pliers",
+            "price": 14.15,
+            "co2_rating": "D",
+            "in_stock": false,
+            "is_eco_friendly": false,
+            "product_image": {
+              "id": "01KWSQ0D9G129Q4Q5SGCCKY7T8",
+              "by_name": "Helinton Fantin",
+              "by_url": "https://unsplash.com/@fantin",
+              "source_name": "Unsplash",
+              "source_url": "https://unsplash.com/photos/W8BNwvOvW4M",
+              "file_name": "pliers01.avif",
+              "title": "Combination pliers"
+            }
+          }
+        }
+      ],
+      "payment": {
+        "payment_method": "credit-card"
+      }
+    },
+    {
+      "id": "01kwsskxz323e72d6hkk8yx84p",
+      "user_id": "01KWSQ0D3Q1S5W9JP16WFPF6N1",
+      "invoice_number": "INV-2026000025",
+      "invoice_date": "2026-07-05 18:45:56",
+      "status": "AWAITING_FULFILLMENT",
+      "total": 26.16,
+      "subtotal": 26.16,
+      "billing_street": "Cheyenne Meadow 141",
+      "billing_city": "North Samir",
+      "billing_state": "Vermont",
+      "billing_country": "US",
+      "billing_postal_code": "78701",
+      "additional_discount_percentage": null,
+      "additional_discount_amount": 0,
+      "invoicelines": [
+        {
+          "id": "01kwssky020ss6cvz2t0fdqhc2",
+          "invoice_id": "01kwsskxz323e72d6hkk8yx84p",
+          "product_id": "01KWSQ0DA48YDSKBHD8GQ8TJ6T",
+          "unit_price": 14.15,
+          "quantity": 1,
+          "discount_percentage": null,
+          "discounted_price": null,
+          "product": {
+            "id": "01KWSQ0DA48YDSKBHD8GQ8TJ6T",
+            "name": "Combination Pliers",
+            "price": 14.15,
+            "co2_rating": "D",
+            "in_stock": false,
+            "is_eco_friendly": false,
+            "product_image": {
+              "id": "01KWSQ0D9G129Q4Q5SGCCKY7T8",
+              "by_name": "Helinton Fantin",
+              "by_url": "https://unsplash.com/@fantin",
+              "source_name": "Unsplash",
+              "source_url": "https://unsplash.com/photos/W8BNwvOvW4M",
+              "file_name": "pliers01.avif",
+              "title": "Combination pliers"
+            }
+          }
+        },
+        {
+          "id": "01kwssky0jhnxj7wb0h0wjcj81",
+          "invoice_id": "01kwsskxz323e72d6hkk8yx84p",
+          "product_id": "01KWSQ0DA788PRRHPT6FTN14WV",
+          "unit_price": 12.01,
+          "quantity": 1,
+          "discount_percentage": null,
+          "discounted_price": null,
+          "product": {
+            "id": "01KWSQ0DA788PRRHPT6FTN14WV",
+            "name": "Pliers",
+            "price": 12.01,
+            "co2_rating": "D",
+            "in_stock": false,
+            "is_eco_friendly": false,
+            "product_image": {
+              "id": "01KWSQ0D9G129Q4Q5SGCCKY7T9",
+              "by_name": "Everyday basics",
+              "by_url": "https://unsplash.com/@zanardi",
+              "source_name": "Unsplash",
+              "source_url": "https://unsplash.com/photos/I8eTuMmxIfo",
+              "file_name": "pliers02.avif",
+              "title": "Pliers"
+            }
+          }
+        }
+      ],
+      "payment": {
+        "payment_method": "cash-on-delivery"
+      }
+    },
+    {
+      "id": "01kwsskxyvz5na45h9eqh4bwr8",
+      "user_id": "01KWSQ0D3Q1S5W9JP16WFPF6N1",
+      "invoice_number": "INV-2026000024",
+      "invoice_date": "2026-07-05 18:45:56",
+      "status": "AWAITING_FULFILLMENT",
+      "total": 14.15,
+      "subtotal": 14.15,
+      "billing_street": "Cheyenne Meadow 141",
+      "billing_city": "North Samir",
+      "billing_state": "Vermont",
+      "billing_country": "US",
+      "billing_postal_code": "78701",
+      "additional_discount_percentage": null,
+      "additional_discount_amount": 0,
+      "invoicelines": [
+        {
+          "id": "01kwsskxzdthqhn82bm8sd7ntj",
+          "invoice_id": "01kwsskxyvz5na45h9eqh4bwr8",
+          "product_id": "01KWSQ0DA48YDSKBHD8GQ8TJ6T",
+          "unit_price": 14.15,
+          "quantity": 1,
+          "discount_percentage": null,
+          "discounted_price": null,
+          "product": {
+            "id": "01KWSQ0DA48YDSKBHD8GQ8TJ6T",
+            "name": "Combination Pliers",
+            "price": 14.15,
+            "co2_rating": "D",
+            "in_stock": false,
+            "is_eco_friendly": false,
+            "product_image": {
+              "id": "01KWSQ0D9G129Q4Q5SGCCKY7T8",
+              "by_name": "Helinton Fantin",
+              "by_url": "https://unsplash.com/@fantin",
+              "source_name": "Unsplash",
+              "source_url": "https://unsplash.com/photos/W8BNwvOvW4M",
+              "file_name": "pliers01.avif",
+              "title": "Combination pliers"
+            }
+          }
+        }
+      ],
+      "payment": {
+        "payment_method": "credit-card"
+      }
+    },
+    {
+      "id": "01kwssk86dzbhq2gc02g4szkw5",
+      "user_id": "01KWSQ0D3Q1S5W9JP16WFPF6N1",
+      "invoice_number": "INV-2026000023",
+      "invoice_date": "2026-07-05 18:45:34",
+      "status": "AWAITING_FULFILLMENT",
+      "total": 14.15,
+      "subtotal": 14.15,
+      "billing_street": "Cheyenne Meadow 141",
+      "billing_city": "North Samir",
+      "billing_state": "Vermont",
+      "billing_country": "US",
+      "billing_postal_code": "78701",
+      "additional_discount_percentage": null,
+      "additional_discount_amount": 0,
+      "invoicelines": [
+        {
+          "id": "01kwssk86yz69att9j7yv9pj3f",
+          "invoice_id": "01kwssk86dzbhq2gc02g4szkw5",
+          "product_id": "01KWSQ0DA48YDSKBHD8GQ8TJ6T",
+          "unit_price": 14.15,
+          "quantity": 1,
+          "discount_percentage": null,
+          "discounted_price": null,
+          "product": {
+            "id": "01KWSQ0DA48YDSKBHD8GQ8TJ6T",
+            "name": "Combination Pliers",
+            "price": 14.15,
+            "co2_rating": "D",
+            "in_stock": false,
+            "is_eco_friendly": false,
+            "product_image": {
+              "id": "01KWSQ0D9G129Q4Q5SGCCKY7T8",
+              "by_name": "Helinton Fantin",
+              "by_url": "https://unsplash.com/@fantin",
+              "source_name": "Unsplash",
+              "source_url": "https://unsplash.com/photos/W8BNwvOvW4M",
+              "file_name": "pliers01.avif",
+              "title": "Combination pliers"
+            }
+          }
+        }
+      ],
+      "payment": {
+        "payment_method": "credit-card"
+      }
+    },
+    {
+      "id": "01kwssk860qz9x7tek73dqj2gc",
+      "user_id": "01KWSQ0D3Q1S5W9JP16WFPF6N1",
+      "invoice_number": "INV-2026000022",
+      "invoice_date": "2026-07-05 18:45:34",
+      "status": "AWAITING_FULFILLMENT",
+      "total": 26.16,
+      "subtotal": 26.16,
+      "billing_street": "Cheyenne Meadow 141",
+      "billing_city": "North Samir",
+      "billing_state": "Vermont",
+      "billing_country": "US",
+      "billing_postal_code": "78701",
+      "additional_discount_percentage": null,
+      "additional_discount_amount": 0,
+      "invoicelines": [
+        {
+          "id": "01kwssk86pctyd0m95cwyfta0z",
+          "invoice_id": "01kwssk860qz9x7tek73dqj2gc",
+          "product_id": "01KWSQ0DA48YDSKBHD8GQ8TJ6T",
+          "unit_price": 14.15,
+          "quantity": 1,
+          "discount_percentage": null,
+          "discounted_price": null,
+          "product": {
+            "id": "01KWSQ0DA48YDSKBHD8GQ8TJ6T",
+            "name": "Combination Pliers",
+            "price": 14.15,
+            "co2_rating": "D",
+            "in_stock": false,
+            "is_eco_friendly": false,
+            "product_image": {
+              "id": "01KWSQ0D9G129Q4Q5SGCCKY7T8",
+              "by_name": "Helinton Fantin",
+              "by_url": "https://unsplash.com/@fantin",
+              "source_name": "Unsplash",
+              "source_url": "https://unsplash.com/photos/W8BNwvOvW4M",
+              "file_name": "pliers01.avif",
+              "title": "Combination pliers"
+            }
+          }
+        },
+        {
+          "id": "01kwssk87216fxt3h4vcbz9rb8",
+          "invoice_id": "01kwssk860qz9x7tek73dqj2gc",
+          "product_id": "01KWSQ0DA788PRRHPT6FTN14WV",
+          "unit_price": 12.01,
+          "quantity": 1,
+          "discount_percentage": null,
+          "discounted_price": null,
+          "product": {
+            "id": "01KWSQ0DA788PRRHPT6FTN14WV",
+            "name": "Pliers",
+            "price": 12.01,
+            "co2_rating": "D",
+            "in_stock": false,
+            "is_eco_friendly": false,
+            "product_image": {
+              "id": "01KWSQ0D9G129Q4Q5SGCCKY7T9",
+              "by_name": "Everyday basics",
+              "by_url": "https://unsplash.com/@zanardi",
+              "source_name": "Unsplash",
+              "source_url": "https://unsplash.com/photos/I8eTuMmxIfo",
+              "file_name": "pliers02.avif",
+              "title": "Pliers"
+            }
+          }
+        }
+      ],
+      "payment": {
+        "payment_method": "cash-on-delivery"
+      }
+    },
+    {
+      "id": "01kwssjb8wgchz1aaw3pzss8d7",
+      "user_id": "01KWSQ0D3Q1S5W9JP16WFPF6N1",
+      "invoice_number": "INV-2026000021",
+      "invoice_date": "2026-07-05 18:45:04",
+      "status": "AWAITING_FULFILLMENT",
+      "total": 26.16,
+      "subtotal": 26.16,
+      "billing_street": "Cheyenne Meadow 141",
+      "billing_city": "North Samir",
+      "billing_state": "Vermont",
+      "billing_country": "US",
+      "billing_postal_code": "78701",
+      "additional_discount_percentage": null,
+      "additional_discount_amount": 0,
+      "invoicelines": [
+        {
+          "id": "01kwssjb9zasfzvkgzadx21myq",
+          "invoice_id": "01kwssjb8wgchz1aaw3pzss8d7",
+          "product_id": "01KWSQ0DA48YDSKBHD8GQ8TJ6T",
+          "unit_price": 14.15,
+          "quantity": 1,
+          "discount_percentage": null,
+          "discounted_price": null,
+          "product": {
+            "id": "01KWSQ0DA48YDSKBHD8GQ8TJ6T",
+            "name": "Combination Pliers",
+            "price": 14.15,
+            "co2_rating": "D",
+            "in_stock": false,
+            "is_eco_friendly": false,
+            "product_image": {
+              "id": "01KWSQ0D9G129Q4Q5SGCCKY7T8",
+              "by_name": "Helinton Fantin",
+              "by_url": "https://unsplash.com/@fantin",
+              "source_name": "Unsplash",
+              "source_url": "https://unsplash.com/photos/W8BNwvOvW4M",
+              "file_name": "pliers01.avif",
+              "title": "Combination pliers"
+            }
+          }
+        },
+        {
+          "id": "01kwssjbamv33kf4f8dk3p2hpp",
+          "invoice_id": "01kwssjb8wgchz1aaw3pzss8d7",
+          "product_id": "01KWSQ0DA788PRRHPT6FTN14WV",
+          "unit_price": 12.01,
+          "quantity": 1,
+          "discount_percentage": null,
+          "discounted_price": null,
+          "product": {
+            "id": "01KWSQ0DA788PRRHPT6FTN14WV",
+            "name": "Pliers",
+            "price": 12.01,
+            "co2_rating": "D",
+            "in_stock": false,
+            "is_eco_friendly": false,
+            "product_image": {
+              "id": "01KWSQ0D9G129Q4Q5SGCCKY7T9",
+              "by_name": "Everyday basics",
+              "by_url": "https://unsplash.com/@zanardi",
+              "source_name": "Unsplash",
+              "source_url": "https://unsplash.com/photos/I8eTuMmxIfo",
+              "file_name": "pliers02.avif",
+              "title": "Pliers"
+            }
+          }
+        }
+      ],
+      "payment": {
+        "payment_method": "cash-on-delivery"
+      }
+    },
+    {
+      "id": "01kwssjb7wnqxbcny40krax4x7",
+      "user_id": "01KWSQ0D3Q1S5W9JP16WFPF6N1",
+      "invoice_number": "INV-2026000020",
+      "invoice_date": "2026-07-05 18:45:04",
+      "status": "AWAITING_FULFILLMENT",
+      "total": 14.15,
+      "subtotal": 14.15,
+      "billing_street": "Cheyenne Meadow 141",
+      "billing_city": "North Samir",
+      "billing_state": "Vermont",
+      "billing_country": "US",
+      "billing_postal_code": "78701",
+      "additional_discount_percentage": null,
+      "additional_discount_amount": 0,
+      "invoicelines": [
+        {
+          "id": "01kwssjb97drs44cg4pvk92dr1",
+          "invoice_id": "01kwssjb7wnqxbcny40krax4x7",
+          "product_id": "01KWSQ0DA48YDSKBHD8GQ8TJ6T",
+          "unit_price": 14.15,
+          "quantity": 1,
+          "discount_percentage": null,
+          "discounted_price": null,
+          "product": {
+            "id": "01KWSQ0DA48YDSKBHD8GQ8TJ6T",
+            "name": "Combination Pliers",
+            "price": 14.15,
+            "co2_rating": "D",
+            "in_stock": false,
+            "is_eco_friendly": false,
+            "product_image": {
+              "id": "01KWSQ0D9G129Q4Q5SGCCKY7T8",
+              "by_name": "Helinton Fantin",
+              "by_url": "https://unsplash.com/@fantin",
+              "source_name": "Unsplash",
+              "source_url": "https://unsplash.com/photos/W8BNwvOvW4M",
+              "file_name": "pliers01.avif",
+              "title": "Combination pliers"
+            }
+          }
+        }
+      ],
+      "payment": {
+        "payment_method": "credit-card"
+      }
+    },
+    {
+      "id": "01kwsshsv2gejyzk6857z11kyk",
+      "user_id": "01KWSQ0D3Q1S5W9JP16WFPF6N1",
+      "invoice_number": "INV-2026000019",
+      "invoice_date": "2026-07-05 18:44:46",
+      "status": "AWAITING_FULFILLMENT",
+      "total": 14.15,
+      "subtotal": 14.15,
+      "billing_street": "Cheyenne Meadow 141",
+      "billing_city": "North Samir",
+      "billing_state": "Vermont",
+      "billing_country": "US",
+      "billing_postal_code": "78701",
+      "additional_discount_percentage": null,
+      "additional_discount_amount": 0,
+      "invoicelines": [
+        {
+          "id": "01kwsshsvjqg7k0prqw49yndfz",
+          "invoice_id": "01kwsshsv2gejyzk6857z11kyk",
+          "product_id": "01KWSQ0DA48YDSKBHD8GQ8TJ6T",
+          "unit_price": 14.15,
+          "quantity": 1,
+          "discount_percentage": null,
+          "discounted_price": null,
+          "product": {
+            "id": "01KWSQ0DA48YDSKBHD8GQ8TJ6T",
+            "name": "Combination Pliers",
+            "price": 14.15,
+            "co2_rating": "D",
+            "in_stock": false,
+            "is_eco_friendly": false,
+            "product_image": {
+              "id": "01KWSQ0D9G129Q4Q5SGCCKY7T8",
+              "by_name": "Helinton Fantin",
+              "by_url": "https://unsplash.com/@fantin",
+              "source_name": "Unsplash",
+              "source_url": "https://unsplash.com/photos/W8BNwvOvW4M",
+              "file_name": "pliers01.avif",
+              "title": "Combination pliers"
+            }
+          }
+        }
+      ],
+      "payment": {
+        "payment_method": "credit-card"
+      }
+    },
+    {
+      "id": "01kwsshstt37m8cv3rfa0djxxd",
+      "user_id": "01KWSQ0D3Q1S5W9JP16WFPF6N1",
+      "invoice_number": "INV-2026000018",
+      "invoice_date": "2026-07-05 18:44:46",
+      "status": "AWAITING_FULFILLMENT",
+      "total": 26.16,
+      "subtotal": 26.16,
+      "billing_street": "Cheyenne Meadow 141",
+      "billing_city": "North Samir",
+      "billing_state": "Vermont",
+      "billing_country": "US",
+      "billing_postal_code": "78701",
+      "additional_discount_percentage": null,
+      "additional_discount_amount": 0,
+      "invoicelines": [
+        {
+          "id": "01kwsshsv98nemqexfeqw8cwfy",
+          "invoice_id": "01kwsshstt37m8cv3rfa0djxxd",
+          "product_id": "01KWSQ0DA48YDSKBHD8GQ8TJ6T",
+          "unit_price": 14.15,
+          "quantity": 1,
+          "discount_percentage": null,
+          "discounted_price": null,
+          "product": {
+            "id": "01KWSQ0DA48YDSKBHD8GQ8TJ6T",
+            "name": "Combination Pliers",
+            "price": 14.15,
+            "co2_rating": "D",
+            "in_stock": false,
+            "is_eco_friendly": false,
+            "product_image": {
+              "id": "01KWSQ0D9G129Q4Q5SGCCKY7T8",
+              "by_name": "Helinton Fantin",
+              "by_url": "https://unsplash.com/@fantin",
+              "source_name": "Unsplash",
+              "source_url": "https://unsplash.com/photos/W8BNwvOvW4M",
+              "file_name": "pliers01.avif",
+              "title": "Combination pliers"
+            }
+          }
+        },
+        {
+          "id": "01kwsshsvmy3wa780de1873jbv",
+          "invoice_id": "01kwsshstt37m8cv3rfa0djxxd",
+          "product_id": "01KWSQ0DA788PRRHPT6FTN14WV",
+          "unit_price": 12.01,
+          "quantity": 1,
+          "discount_percentage": null,
+          "discounted_price": null,
+          "product": {
+            "id": "01KWSQ0DA788PRRHPT6FTN14WV",
+            "name": "Pliers",
+            "price": 12.01,
+            "co2_rating": "D",
+            "in_stock": false,
+            "is_eco_friendly": false,
+            "product_image": {
+              "id": "01KWSQ0D9G129Q4Q5SGCCKY7T9",
+              "by_name": "Everyday basics",
+              "by_url": "https://unsplash.com/@zanardi",
+              "source_name": "Unsplash",
+              "source_url": "https://unsplash.com/photos/I8eTuMmxIfo",
+              "file_name": "pliers02.avif",
+              "title": "Pliers"
+            }
+          }
+        }
+      ],
+      "payment": {
+        "payment_method": "cash-on-delivery"
+      }
+    },
+    {
+      "id": "01kwssgg73dwpbvksbd35ayqw4",
+      "user_id": "01KWSQ0D3Q1S5W9JP16WFPF6N1",
+      "invoice_number": "INV-2026000017",
+      "invoice_date": "2026-07-05 18:44:03",
+      "status": "AWAITING_FULFILLMENT",
+      "total": 14.15,
+      "subtotal": 14.15,
+      "billing_street": "Cheyenne Meadow 141",
+      "billing_city": "North Samir",
+      "billing_state": "Vermont",
+      "billing_country": "US",
+      "billing_postal_code": "78701",
+      "additional_discount_percentage": null,
+      "additional_discount_amount": 0,
+      "invoicelines": [
+        {
+          "id": "01kwssgg7kjsrwd6edn9pd3jbj",
+          "invoice_id": "01kwssgg73dwpbvksbd35ayqw4",
+          "product_id": "01KWSQ0DA48YDSKBHD8GQ8TJ6T",
+          "unit_price": 14.15,
+          "quantity": 1,
+          "discount_percentage": null,
+          "discounted_price": null,
+          "product": {
+            "id": "01KWSQ0DA48YDSKBHD8GQ8TJ6T",
+            "name": "Combination Pliers",
+            "price": 14.15,
+            "co2_rating": "D",
+            "in_stock": false,
+            "is_eco_friendly": false,
+            "product_image": {
+              "id": "01KWSQ0D9G129Q4Q5SGCCKY7T8",
+              "by_name": "Helinton Fantin",
+              "by_url": "https://unsplash.com/@fantin",
+              "source_name": "Unsplash",
+              "source_url": "https://unsplash.com/photos/W8BNwvOvW4M",
+              "file_name": "pliers01.avif",
+              "title": "Combination pliers"
+            }
+          }
+        }
+      ],
+      "payment": {
+        "payment_method": "credit-card"
+      }
+    },
+    {
+      "id": "01kwssg4zkb55w73th11gj3dk8",
+      "user_id": "01KWSQ0D3Q1S5W9JP16WFPF6N1",
+      "invoice_number": "INV-2026000016",
+      "invoice_date": "2026-07-05 18:43:52",
+      "status": "AWAITING_FULFILLMENT",
+      "total": 26.16,
+      "subtotal": 26.16,
+      "billing_street": "Cheyenne Meadow 141",
+      "billing_city": "North Samir",
+      "billing_state": "Vermont",
+      "billing_country": "US",
+      "billing_postal_code": "78701",
+      "additional_discount_percentage": null,
+      "additional_discount_amount": 0,
+      "invoicelines": [
+        {
+          "id": "01kwssg4zza05ze9v98jc4pds0",
+          "invoice_id": "01kwssg4zkb55w73th11gj3dk8",
+          "product_id": "01KWSQ0DA48YDSKBHD8GQ8TJ6T",
+          "unit_price": 14.15,
+          "quantity": 1,
+          "discount_percentage": null,
+          "discounted_price": null,
+          "product": {
+            "id": "01KWSQ0DA48YDSKBHD8GQ8TJ6T",
+            "name": "Combination Pliers",
+            "price": 14.15,
+            "co2_rating": "D",
+            "in_stock": false,
+            "is_eco_friendly": false,
+            "product_image": {
+              "id": "01KWSQ0D9G129Q4Q5SGCCKY7T8",
+              "by_name": "Helinton Fantin",
+              "by_url": "https://unsplash.com/@fantin",
+              "source_name": "Unsplash",
+              "source_url": "https://unsplash.com/photos/W8BNwvOvW4M",
+              "file_name": "pliers01.avif",
+              "title": "Combination pliers"
+            }
+          }
+        },
+        {
+          "id": "01kwssg507fx1myvqe0cvyx056",
+          "invoice_id": "01kwssg4zkb55w73th11gj3dk8",
+          "product_id": "01KWSQ0DA788PRRHPT6FTN14WV",
+          "unit_price": 12.01,
+          "quantity": 1,
+          "discount_percentage": null,
+          "discounted_price": null,
+          "product": {
+            "id": "01KWSQ0DA788PRRHPT6FTN14WV",
+            "name": "Pliers",
+            "price": 12.01,
+            "co2_rating": "D",
+            "in_stock": false,
+            "is_eco_friendly": false,
+            "product_image": {
+              "id": "01KWSQ0D9G129Q4Q5SGCCKY7T9",
+              "by_name": "Everyday basics",
+              "by_url": "https://unsplash.com/@zanardi",
+              "source_name": "Unsplash",
+              "source_url": "https://unsplash.com/photos/I8eTuMmxIfo",
+              "file_name": "pliers02.avif",
+              "title": "Pliers"
+            }
+          }
+        }
+      ],
+      "payment": {
+        "payment_method": "cash-on-delivery"
+      }
+    },
+    {
+      "id": "01kwssg4xbmmktqvs9dj709tyz",
+      "user_id": "01KWSQ0D3Q1S5W9JP16WFPF6N1",
+      "invoice_number": "INV-2026000015",
+      "invoice_date": "2026-07-05 18:43:52",
+      "status": "AWAITING_FULFILLMENT",
+      "total": 14.15,
+      "subtotal": 14.15,
+      "billing_street": "Cheyenne Meadow 141",
+      "billing_city": "North Samir",
+      "billing_state": "Vermont",
+      "billing_country": "US",
+      "billing_postal_code": "78701",
+      "additional_discount_percentage": null,
+      "additional_discount_amount": 0,
+      "invoicelines": [
+        {
+          "id": "01kwssg4xsfeygz6fwgjf8w8c9",
+          "invoice_id": "01kwssg4xbmmktqvs9dj709tyz",
+          "product_id": "01KWSQ0DA48YDSKBHD8GQ8TJ6T",
+          "unit_price": 14.15,
+          "quantity": 1,
+          "discount_percentage": null,
+          "discounted_price": null,
+          "product": {
+            "id": "01KWSQ0DA48YDSKBHD8GQ8TJ6T",
+            "name": "Combination Pliers",
+            "price": 14.15,
+            "co2_rating": "D",
+            "in_stock": false,
+            "is_eco_friendly": false,
+            "product_image": {
+              "id": "01KWSQ0D9G129Q4Q5SGCCKY7T8",
+              "by_name": "Helinton Fantin",
+              "by_url": "https://unsplash.com/@fantin",
+              "source_name": "Unsplash",
+              "source_url": "https://unsplash.com/photos/W8BNwvOvW4M",
+              "file_name": "pliers01.avif",
+              "title": "Combination pliers"
+            }
+          }
+        }
+      ],
+      "payment": {
+        "payment_method": "credit-card"
+      }
+    }
+  ],
+  "from": 1,
+  "last_page": 5,
+  "per_page": 15,
+  "to": 15,
+  "total": 61
+}

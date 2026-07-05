@@ -1,0 +1,90 @@
+[
+  {
+    "seq": 1,
+    "method": "POST",
+    "url": "https://api.practicesoftwaretesting.com/users/register",
+    "status": 201,
+    "durationMs": 850,
+    "requestHeaders": {
+      "accept": "application/json",
+      "content-type": "application/json"
+    },
+    "requestBody": {
+      "first_name": "Cortez",
+      "last_name": "Schaefer",
+      "address": {
+        "street": "842 Mortimer Manors",
+        "house_number": "426",
+        "city": "San Leandro",
+        "state": "Maine",
+        "country": "US",
+        "postal_code": "67626"
+      },
+      "phone": "4908564933",
+      "dob": "1974-03-15",
+      "password": "Aa1…«redacted»…6X (len=16)",
+      "email": "tqp.mr8584th.2402.1.qmdueix0@example.com"
+    },
+    "responseHeaders": {
+      "access-control-allow-origin": "*",
+      "access-control-expose-headers": "Content-Disposition",
+      "cache-control": "no-cache, private",
+      "connection": "Upgrade, close",
+      "content-type": "application/json",
+      "date": "Sun, 05 Jul 2026 18:47:20 GMT",
+      "server": "Apache/2.4.52 (Ubuntu)",
+      "transfer-encoding": "chunked",
+      "upgrade": "h2"
+    },
+    "responseBody": {
+      "first_name": "Cortez",
+      "last_name": "Schaefer",
+      "phone": "4908564933",
+      "dob": "1974-03-15",
+      "email": "tqp.mr8584th.2402.1.qmdueix0@example.com",
+      "id": "01kwsspgkbq4rph85k94t6hczh",
+      "created_at": "2026-07-05 18:47:20",
+      "address": {
+        "street": "842 Mortimer Manors",
+        "house_number": "426",
+        "city": "San Leandro",
+        "state": "Maine",
+        "country": "US",
+        "postal_code": "67626"
+      }
+    }
+  },
+  {
+    "seq": 2,
+    "method": "POST",
+    "url": "https://api.practicesoftwaretesting.com/users/login",
+    "status": 200,
+    "durationMs": 549,
+    "requestHeaders": {
+      "accept": "application/json",
+      "content-type": "application/json"
+    },
+    "requestBody": {
+      "email": "tqp.mr8584th.2402.1.qmdueix0@example.com",
+      "password": "Aa1…«redacted»…6X (len=16)"
+    },
+    "responseHeaders": {
+      "access-control-allow-origin": "*",
+      "access-control-expose-headers": "Content-Disposition",
+      "cache-control": "no-cache, private",
+      "connection": "Upgrade, close",
+      "content-encoding": "gzip",
+      "content-length": "381",
+      "content-type": "application/json",
+      "date": "Sun, 05 Jul 2026 18:47:21 GMT",
+      "server": "Apache/2.4.52 (Ubuntu)",
+      "upgrade": "h2",
+      "vary": "Accept-Encoding"
+    },
+    "responseBody": {
+      "access_token": "eyJ…«redacted»…7w (len=395)",
+      "token_type": "«redacted»",
+      "expires_in": 300
+    }
+  }
+]

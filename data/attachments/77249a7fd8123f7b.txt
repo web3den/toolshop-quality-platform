@@ -1,0 +1,15 @@
+#1 GET https://api.practicesoftwaretesting.com/brands
+→ {"accept":"application/json"}
+← 200 (482ms) {"access-control-allow-origin":"*","access-control-expose-headers":"Content-Disposition","cache-control":"max-age=120, public","connection":"Upgrade, close","content-encoding":"gzip","content-length":"136","content-type":"application/json","date":"Sun, 05 Jul 2026 18:47:26 GMT","etag":"\"a2e0c7d5af3e2de7fbc5c6ea0c8a3f1e-gzip\"","server":"Apache/2.4.52 (Ubuntu)","upgrade":"h2","vary":"Accept-Encoding"}
+[
+  {
+    "id": "01KWSQ0CYMA7FSXDT8HEQPNPH0",
+    "name": "ForgeFlex Tools",
+    "slug": "forgeflex-tools"
+  },
+  {
+    "id": "01KWSQ0CYMA7FSXDT8HEQPNPH1",
+    "name": "MightyCraft Hardware",
+    "slug": "mightycraft-hardware"
+  }
+]

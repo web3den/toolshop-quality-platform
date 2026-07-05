@@ -1,0 +1,147 @@
+[
+  {
+    "seq": 1,
+    "method": "POST",
+    "url": "https://api.practicesoftwaretesting.com/invoices",
+    "status": 201,
+    "durationMs": 527,
+    "requestHeaders": {
+      "accept": "application/json",
+      "authorization": "«redacted»",
+      "content-type": "application/json"
+    },
+    "requestBody": {
+      "billing_street": "Cheyenne Meadow 141",
+      "billing_city": "North Samir",
+      "billing_state": "Vermont",
+      "billing_country": "US",
+      "billing_postal_code": "78701",
+      "payment_method": "credit-card",
+      "payment_details": {
+        "credit_card_number": "411…«redacted»…11 (len=19)",
+        "expiration_date": "02/2028",
+        "cvv": "«redacted»",
+        "card_holder_name": "Megan Franey"
+      },
+      "cart_id": "01kwsspjsw6yhqg995b7q37t8h"
+    },
+    "responseHeaders": {
+      "access-control-allow-origin": "*",
+      "access-control-expose-headers": "Content-Disposition",
+      "cache-control": "no-cache, private",
+      "connection": "Upgrade, close",
+      "content-type": "application/json",
+      "date": "Sun, 05 Jul 2026 18:47:24 GMT",
+      "server": "Apache/2.4.52 (Ubuntu)",
+      "transfer-encoding": "chunked",
+      "upgrade": "h2",
+      "vary": "Authorization"
+    },
+    "responseBody": {
+      "billing_street": "Cheyenne Meadow 141",
+      "billing_city": "North Samir",
+      "billing_state": "Vermont",
+      "billing_country": "US",
+      "billing_postal_code": "78701",
+      "user_id": "01KWSQ0D3Q1S5W9JP16WFPF6N1",
+      "invoice_date": "2026-07-05T18:47:24.665437Z",
+      "invoice_number": "INV-2026000028",
+      "id": "01kwsspm7x949be3nfakjh8t0y",
+      "created_at": "2026-07-05T18:47:24.000000Z",
+      "subtotal": 14.15,
+      "total": 14.15,
+      "additional_discount_percentage": null,
+      "additional_discount_amount": 0,
+      "eco_discount_percentage": 0,
+      "eco_discount_amount": 0
+    }
+  },
+  {
+    "seq": 2,
+    "method": "GET",
+    "url": "https://api.practicesoftwaretesting.com/invoices/01kwsspm7x949be3nfakjh8t0y",
+    "status": 200,
+    "durationMs": 498,
+    "requestHeaders": {
+      "accept": "application/json",
+      "authorization": "«redacted»"
+    },
+    "requestBody": null,
+    "responseHeaders": {
+      "access-control-allow-origin": "*",
+      "access-control-expose-headers": "Content-Disposition",
+      "cache-control": "no-cache, private",
+      "connection": "Upgrade, close",
+      "content-encoding": "gzip",
+      "content-length": "1138",
+      "content-type": "application/json",
+      "date": "Sun, 05 Jul 2026 18:47:25 GMT",
+      "server": "Apache/2.4.52 (Ubuntu)",
+      "upgrade": "h2",
+      "vary": "Authorization,Accept-Encoding"
+    },
+    "responseBody": {
+      "id": "01kwsspm7x949be3nfakjh8t0y",
+      "invoice_date": "2026-07-05 18:47:24",
+      "additional_discount_percentage": null,
+      "additional_discount_amount": 0,
+      "eco_discount_percentage": 0,
+      "eco_discount_amount": 0,
+      "invoice_number": "INV-2026000028",
+      "billing_street": "Cheyenne Meadow 141",
+      "billing_city": "North Samir",
+      "billing_state": "Vermont",
+      "billing_country": "US",
+      "billing_postal_code": "78701",
+      "subtotal": 14.15,
+      "total": 14.15,
+      "status": "AWAITING_FULFILLMENT",
+      "status_message": null,
+      "created_at": "2026-07-05T18:47:24.000000Z",
+      "user_id": "01KWSQ0D3Q1S5W9JP16WFPF6N1",
+      "invoicelines": [
+        {
+          "id": "01kwsspm8bgpqzfc12c58epw9a",
+          "invoice_id": "01kwsspm7x949be3nfakjh8t0y",
+          "product_id": "01KWSQ0DA48YDSKBHD8GQ8TJ6T",
+          "unit_price": 14.15,
+          "quantity": 1,
+          "discount_percentage": null,
+          "discounted_price": null,
+          "product": {
+            "id": "01KWSQ0DA48YDSKBHD8GQ8TJ6T",
+            "name": "Combination Pliers",
+            "description": "Versatile combination pliers designed for gripping, bending, and cutting wire with ease. Featuring chrome vanadium steel construction with induction-hardened cutting edges, these pliers deliver excellent grip and leverage for a wide range of tasks. The precision-machined jaws combine flat gripping surfaces with a pipe-grip section and integrated wire cutter for true multi-purpose functionality. Ergonomic bi-component handles reduce hand fatigue during extended use and provide a secure hold even with oily or gloved hands. The joint is precisely fitted to eliminate play and ensure smooth operation over thousands of cycles. Ideal for electricians, mechanics, and DIY enthusiasts tackling everyday projects around the workshop or job site.",
+            "price": 14.15,
+            "co2_rating": "D",
+            "is_rental": false,
+            "in_stock": false,
+            "is_eco_friendly": false,
+            "product_image": {
+              "id": "01KWSQ0D9G129Q4Q5SGCCKY7T8",
+              "by_name": "Helinton Fantin",
+              "by_url": "https://unsplash.com/@fantin"
+            },
+            "category": {
+              "id": "01KWSQ0D93MCWB5Z9GDEPGVJD9",
+              "name": "Pliers"
+            },
+            "brand": {
+              "id": "01KWSQ0CYMA7FSXDT8HEQPNPH0",
+              "name": "ForgeFlex Tools"
+            }
+          }
+        }
+      ],
+      "payment": {
+        "payment_method": "credit-card",
+        "payment_details": {
+          "credit_card_number": "411…«redacted»…11 (len=19)",
+          "expiration_date": "02/2028",
+          "cvv": "«redacted»",
+          "card_holder_name": "Megan Franey"
+        }
+      }
+    }
+  }
+]

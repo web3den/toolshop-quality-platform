@@ -1,0 +1,36 @@
+#1 POST https://api.practicesoftwaretesting.com/users/register
+→ {"accept":"application/json","content-type":"application/json"}
+{
+  "first_name": "Raheem",
+  "last_name": "Bernhard",
+  "address": {
+    "street": "252 W 5th Street",
+    "house_number": "317",
+    "city": "East Yolandaland",
+    "state": "Ohio",
+    "country": "US",
+    "postal_code": "64833"
+  },
+  "phone": "4682294705",
+  "dob": "1979-07-27",
+  "password": "Aa1…«redacted»…w7 (len=16)",
+  "email": "tqp.mr858h31.3168.1.xt5xmtug@example.com"
+}
+← 201 (528ms) {"access-control-allow-origin":"*","access-control-expose-headers":"Content-Disposition","cache-control":"no-cache, private","connection":"Upgrade, close","content-type":"application/json","date":"Sun, 05 Jul 2026 18:47:36 GMT","server":"Apache/2.4.52 (Ubuntu)","transfer-encoding":"chunked","upgrade":"h2"}
+{
+  "first_name": "Raheem",
+  "last_name": "Bernhard",
+  "phone": "4682294705",
+  "dob": "1979-07-27",
+  "email": "tqp.mr858h31.3168.1.xt5xmtug@example.com",
+  "id": "01kwsspzt8eqak93yqvjh3kwen",
+  "created_at": "2026-07-05 18:47:36",
+  "address": {
+    "street": "252 W 5th Street",
+    "house_number": "317",
+    "city": "East Yolandaland",
+    "state": "Ohio",
+    "country": "US",
+    "postal_code": "64833"
+  }
+}
