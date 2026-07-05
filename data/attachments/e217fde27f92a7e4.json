@@ -1,0 +1,48 @@
+[
+  {
+    "seq": 1,
+    "method": "POST",
+    "url": "https://api.practicesoftwaretesting.com/users/register",
+    "status": 422,
+    "durationMs": 332,
+    "requestHeaders": {
+      "accept": "application/json",
+      "content-type": "application/json"
+    },
+    "requestBody": {
+      "first_name": "Maureen",
+      "last_name": "Wiegand",
+      "address": {
+        "street": "4979 Antonetta Avenue",
+        "house_number": "818",
+        "city": "Lake Tobin",
+        "state": "Tennessee",
+        "country": "US",
+        "postal_code": "27741"
+      },
+      "phone": "7385709235",
+      "dob": "1988-09-02",
+      "password": "«redacted»",
+      "email": "tqp.mr83tsra.2381.2.3id0ucns@example.com"
+    },
+    "responseHeaders": {
+      "access-control-allow-origin": "*",
+      "access-control-expose-headers": "Content-Disposition",
+      "cache-control": "no-cache, private",
+      "connection": "Upgrade, close",
+      "content-type": "application/json",
+      "date": "Sun, 05 Jul 2026 18:08:12 GMT",
+      "server": "Apache/2.4.52 (Ubuntu)",
+      "transfer-encoding": "chunked",
+      "upgrade": "h2"
+    },
+    "responseBody": {
+      "password": [
+        "The password field must be at least 8 characters.",
+        "The password field must contain at least one uppercase and one lowercase letter.",
+        "The password field must contain at least one symbol.",
+        "The password field must contain at least one number."
+      ]
+    }
+  }
+]
