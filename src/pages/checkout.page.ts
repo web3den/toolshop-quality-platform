@@ -64,16 +64,24 @@ export class CheckoutPage extends BasePage {
     await this.houseNumber.fill(address.house_number);
     // Auto-fill is complete once the lookup response populates the city.
     await expect(this.city).not.toHaveValue('', { timeout: 15_000 });
-    // The faker-backed lookup sometimes returns no street/state, and its
-    // response can land *after* the first blank-check and clear a field we
-    // just filled. The form requires them client-side while the server only
-    // cross-validates fields its own lookup returned — so keep re-filling
-    // blanks until the whole form is stable and the button unlocks.
+    // The lookup response lands asynchronously and patches the whole form:
+    // it can blank street/state (faker gaps) and even wipe the postal code /
+    // house number we just typed (seen on slow CI runners). The server only
+    // cross-validates fields its own lookup returned, so re-fill EVERY
+    // required field with its intended value until the form is stable and
+    // the button unlocks.
+    const requiredValues: Array<[typeof this.street, string]> = [
+      [this.street, 'N/A'],
+      [this.state, 'N/A'],
+      [this.city, 'N/A'],
+      [this.postalCode, address.postal_code],
+      [this.houseNumber, address.house_number],
+    ];
     await expect
       .poll(
         async () => {
-          for (const field of [this.street, this.state]) {
-            if ((await field.inputValue()) === '') await field.fill('N/A');
+          for (const [field, value] of requiredValues) {
+            if ((await field.inputValue()) === '') await field.fill(value);
           }
           return this.proceedFromAddress.isEnabled();
         },
