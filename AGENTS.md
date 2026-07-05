@@ -78,6 +78,10 @@ Task-specific playbooks live in `docs/skills/`:
 - `docs/skills/test-quality-review.md` — falsifiability audit, definite
   DOs/DON'Ts, tagging rules (also the CI review agent's system prompt)
 - `docs/skills/test-from-acceptance-criteria.md` — turn ACs/docs into tests
+- `docs/skills/exploratory-testing.md` — charter-driven exploration via the
+  Chrome DevTools MCP (console/network/perf below the UI surface)
+- `docs/skills/bug-reverification.md` — verify fixed Jira tickets with
+  evidence, verdicts, and a regression test (GitHub Issues fallback included)
 - `docs/skills/failure-triage.md` — classify failures (product-bug / test-bug / flake / environment)
 - `docs/skills/locator-repair.md` — repair selector drift correctly
 - `docs/skills/visual-baseline-review.md` — review screenshot diffs

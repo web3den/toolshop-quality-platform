@@ -101,6 +101,13 @@ playbooks in [docs/skills/](docs/skills/):
   CI review agent, so humans and agents enforce the same bar)
 - [test-from-acceptance-criteria](docs/skills/test-from-acceptance-criteria.md) —
   AC → falsifiable claims → cheapest layer → framework primitives → prove it fails
+- [exploratory-testing](docs/skills/exploratory-testing.md) — charter-driven
+  sessions through the Chrome DevTools MCP: tours, below-the-surface
+  console/network/perf observation, findings that harden the scripted suite
+  (example session: [docs/exploratory/](docs/exploratory/))
+- [bug-reverification](docs/skills/bug-reverification.md) — Jira ticket →
+  re-reproduce on the affected build → verify the fix → verdict with evidence
+  → regression test
 - [failure-triage](docs/skills/failure-triage.md) · [locator-repair](docs/skills/locator-repair.md) ·
   [visual-baseline-review](docs/skills/visual-baseline-review.md) · [new-test-authoring](docs/skills/new-test-authoring.md)
 
